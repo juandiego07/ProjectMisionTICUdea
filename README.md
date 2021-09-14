@@ -1,7 +1,7 @@
 # ProjectMisionTICUdea
 Repositorio para el proyecto web del ciclo 3 de Misión TIC de la UDEA
 
-## Integrantes:
 
+# Integrantes
 * Juan Diego Vargas Posada
-* Karen Liseth Acuña Suabita
+* Edison Giancarlo Prieto
