@@ -6,3 +6,5 @@ Repositorio para el proyecto web del ciclo 3 de Misión TIC de la UDEA
 * Edison Giancarlo Prieto
 * Karen Liseth Acuña
 * Esteban Alba 
+* Cristian Mauricio Zapata Salazar
+
