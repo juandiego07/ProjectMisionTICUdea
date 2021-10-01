@@ -128,10 +128,13 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 col-md-6">
                             <p class="text-primary module-title">Usuarios</p>
                         </div>
-
+                        <div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-center">
+                            <a href="/banco-del-estado-frontend/templates/user/form.html" class="btn btn-primary" style="text-decoration: none;"> Registrar usuario</a>
+                            <!-- <button class="btn btn-primary"><a href="/banco-del-estado-frontend/templates/sales/form.html" class="registrar">Registrar Venta</a></button> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -207,8 +210,58 @@
                         </div>
                         <div class="col-12 col-md-1">
                             <div>
-                                <a class="gx-btn gx-btn-lg gx-flat-btn text-muted p-1 m-0" data-toggle="tooltip" title="Editar" href="/ProjectMisionTICUdea/banco-del-estado-frontend/templates/product/form.html"><span class="material-icons">edit</span></a>
+                                <a class="gx-btn gx-btn-lg gx-flat-btn text-muted p-1 m-0" data-toggle="tooltip" title="Editar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="/ProjectMisionTICUdea/banco-del-estado-frontend/templates/product/form.html"><span class="material-icons">edit</span></a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Actualizar Usuario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="fieldName" class="form-label">Nombre de usuario</label>
+                                        <input type="text" class="form-control" id="fieldName" placeholder="user 2" disabled readonly>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="fieldEmail" class="form-label">Correo de registro</label>
+                                        <input type="email" class="form-control" id="fieldEmail" placeholder="name2@example.com" disabled readonly>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="selectState" class="form-label">Estado</label>
+                                        <select class="form-select form-select-md" aria-label=".form-select-md example" id="selectState">
+                                <!-- <option >---------</option> -->
+                                <option value="1">Pendiente</option>
+                                <option value="2" selected>Autorizado</option>
+                                <option value="3">No autorizado</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="selectRol" class="form-label">Rol</label>
+                                        <select class="form-select form-select-md" aria-label=".form-select-md example" id="selectRol">
+                                            <!-- <option >---------</option> -->
+                                            <option value="1" selected>Administrador</option>
+                                            <option value="2">Vendedor</option>
+                                        </select>
+                                    </div>
+                                    <!-- <div class="container-fluid text-center">
+                                        <button id="submitForm" type="button" class="btn btn-primary">Guardar</button>
+                                        <button id="prueba" type="button" class="btn btn-primary">prueba</button>
+                                    </div> -->
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Actualizar</button>
                         </div>
                     </div>
                 </div>

@@ -128,10 +128,13 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 col-md-6">
                             <p class="text-primary module-title">Servicios</p>
                         </div>
-
+                        <div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-center">
+                            <a href="/banco-del-estado-frontend/templates/product/form.html" class="btn btn-primary" style="text-decoration: none;"> Registrar producto</a>
+                            <!-- <button class="btn btn-primary"><a href="/banco-del-estado-frontend/templates/sales/form.html" class="registrar">Registrar Venta</a></button> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -207,8 +210,56 @@
                         </div>
                         <div class="col-12 col-md-1">
                             <div>
-                                <a class="gx-btn gx-btn-lg gx-flat-btn text-muted p-1 m-0" data-toggle="tooltip" title="Editar" href=""><span class="material-icons">edit</span></a>
+                                <a class="gx-btn gx-btn-lg gx-flat-btn text-muted p-1 m-0" data-toggle="tooltip" title="Editar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href=""><span class="material-icons">edit</span></a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Actualizar Producto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="identificador" class="form-label">Identificador</label>
+                                        <input type="text" class="form-control" id="identificador" value="CC" disabled>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="nombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="nombre" value="Cuenta corriente">
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="valorUnitario" class="form-label">Valor Unitario</label>
+                                        <input type="number" class="form-control" id="valorUnitario" value="1200">
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="estado" class="form-label">Estado</label>
+                                        <select class="form-select" aria-label="Default select example" id="estado">
+                                            <!-- <option selected>---------</option> -->
+                                            <option value="0" selected>Disponible</option>
+                                            <option value="2">No disponible</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="descripcion" class="form-label">Descripción</label>
+                                        <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                                    </div>
+                                    <!-- <div class="container-fluid text-center">
+                                    <button id="submitForm" type="button" class="btn btn-primary">Guardar</button>
+                                </div> -->
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Actualizar</button>
                         </div>
                     </div>
                 </div>
