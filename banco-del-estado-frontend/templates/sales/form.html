@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/banco-del-estado-frontend/templates/css/style.css">
+    <title>Ventas</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <a class="logo" href="#bank">
+            <div class="d-flex align-items-center"><span class="material-icons pe-2">account_balance</span><span>Banco Estatal</span>
+            </div>
+        </a>
+        <a href="#home">
+            <div class="d-flex align-items-center"><span class="material-icons pe-2">home</span><span>Inicio</span>
+            </div>
+        </a>
+        <a href="/banco-del-estado-frontend/templates/user/list.html">
+            <div class="d-flex align-items-center"><span class="material-icons pe-2">account_circle</span><span>Usuarios</span>
+            </div>
+        </a>
+        <a href="/banco-del-estado-frontend/templates/product/list.html">
+            <div class="d-flex align-items-center"><span class="material-icons pe-2">home_repair_service</span><span>Servicios</span>
+            </div>
+        </a>
+        <a class="active" href="#receipt">
+            <div class="d-flex align-items-center"><span class="material-icons pe-2">receipt_long</span><span>Ventas</span>
+            </div>
+        </a>
+    </div>
+    <div class="content">
+        <nav class="navbar navbar-light bg-light mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand"></a>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-primary text-dark" type="submit"><span class="material-icons">search</span>
+                </button>
+                </form>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="text-primary module-title">Ventas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header border-primary">
+                    <strong class="text-primary">Venta</strong>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="identificador" class="form-label">Identificador</label>
+                                <input type="text" class="form-control" id="identificador">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="fecha" class="form-label">Fecha de la venta</label>
+                                <input type="date" class="form-control" id="fecha">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="nombre" class="form-label">Nombre del cliente</label>
+                                <input type="text" class="form-control" id="nombre">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="documento" class="form-label">Documento de identidad</label>
+                                <input type="number" class="form-control" id="documento">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="producto" class="form-label">Producto</label>
+                                <div class="d-flex">
+                                    <select class="form-select me-2" aria-label="Default select example" id="producto">
+                                        <option selected>---------</option>
+                                        <option value="0">Producto 1</option>
+                                        <option value="2">Producto 2</option>
+                                        <option value="3">Producto 3</option>
+                                        <option value="4">Producto 4</option>
+                                        <option value="5">Producto 5</option>
+                                        <option value="6">Producto 6</option>                                
+                                    </select>
+                                    <button type="submit" class="btn btn-primary">Agregar</button>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="preciounitario" class="form-label">Precio unitario</label>
+                                <input type="number" class="form-control" id="preciounitario">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="idVendedor" class="form-label">Identificador del vendedor</label>
+                                <input type="number" class="form-control" id="idVendedor">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label for="totalVenta" class="form-label">Valor total venta</label>
+                                <input type="number" class="form-control" id="totalVenta">
+                            </div>
+                            <!-- <div class="col-12 col-md-6 mb-3">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                            </div> -->
+                            <div class="container-fluid text-center">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
