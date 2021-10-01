@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/banco-del-estado-frontend/templates/css/style.css">
     <title>Ventas</title>
@@ -50,7 +51,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <p class="text-primary module-title">Servicios</p>
+                            <p class="text-primary module-title">Listados de ventas</p>
                         </div>
 
                     </div>
@@ -63,25 +64,25 @@
                             <div class="row">
                                 <div class="col-12 col-md-3 col-sm-6">
                                     <p class="text-muted text-capitalize mb-0">
-                                        Nombre de producto
-                                    </p>
-                                    <div>Cuenta de ahorros</div>
-                                </div>
-                                <div class="col-12 col-md-3 col-sm-6">
-                                    <p class="text-muted text-capitalize mb-0">
                                         Identificador
                                     </p>
-                                    <div>CA</div>
+                                    <div>Fac001</div>
                                 </div>
                                 <div class="col-12 col-md-3 col-sm-6">
                                     <p class="text-muted text-capitalize mb-0">
-                                        Estado
+                                        Documento identidad
                                     </p>
-                                    <div>Disponible</div>
+                                    <div>123456789</div>
                                 </div>
                                 <div class="col-12 col-md-3 col-sm-6">
                                     <p class="text-muted text-capitalize mb-0">
-                                        Valor unitario
+                                        Nombre cliente
+                                    </p>
+                                    <div>Pepito Perez</div>
+                                </div>
+                                <div class="col-12 col-md-3 col-sm-6">
+                                    <p class="text-muted text-capitalize mb-0">
+                                        Valor venta
                                     </p>
                                     <div>$ 1100</div>
                                 </div>
@@ -102,27 +103,27 @@
                             <div class="row">
                                 <div class="col-12 col-md-3 col-sm-6">
                                     <p class="text-muted text-capitalize mb-0">
-                                        Nombre de producto
-                                    </p>
-                                    <div>Cuenta corriente</div>
-                                </div>
-                                <div class="col-12 col-md-3 col-sm-6">
-                                    <p class="text-muted text-capitalize mb-0">
                                         Identificador
                                     </p>
-                                    <div>CC</div>
+                                    <div>Fac002</div>
                                 </div>
                                 <div class="col-12 col-md-3 col-sm-6">
                                     <p class="text-muted text-capitalize mb-0">
-                                        Estado
+                                        Documento identidad
                                     </p>
-                                    <div>Disponible</div>
+                                    <div>98765432</div>
                                 </div>
                                 <div class="col-12 col-md-3 col-sm-6">
                                     <p class="text-muted text-capitalize mb-0">
-                                        Valor unitario
+                                        Nombre cliente
                                     </p>
-                                    <div>$ 1200</div>
+                                    <div>John Doe</div>
+                                </div>
+                                <div class="col-12 col-md-3 col-sm-6">
+                                    <p class="text-muted text-capitalize mb-0">
+                                        Valor venta
+                                    </p>
+                                    <div>$ 1100</div>
                                 </div>
                             </div>
                         </div>
@@ -133,6 +134,116 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="card pb-3 pt-3 mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-11 pe-0">
+                            <div class="row">
+                                <div class="col-12 col-md-3 col-sm-6">
+                                    <p class="text-muted text-capitalize mb-0">
+                                        Identificador
+                                    </p>
+                                    <div>Fac003</div>
+                                </div>
+                                <div class="col-12 col-md-3 col-sm-6">
+                                    <p class="text-muted text-capitalize mb-0">
+                                        Documento identidad
+                                    </p>
+                                    <div>123465132</div>
+                                </div>
+                                <div class="col-12 col-md-3 col-sm-6">
+                                    <p class="text-muted text-capitalize mb-0">
+                                        Nombre cliente
+                                    </p>
+                                    <div>John Conor</div>
+                                </div>
+                                <div class="col-12 col-md-3 col-sm-6">
+                                    <p class="text-muted text-capitalize mb-0">
+                                        Valor venta
+                                    </p>
+                                    <div>$ 1100</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-1">
+                            <div>
+                                <a class="gx-btn gx-btn-lg gx-flat-btn text-muted p-1 m-0" data-toggle="tooltip" title="Editar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href=""><span class="material-icons">edit</span></a>
+                            </div>
+                            <!-- Button trigger modal -->
+                            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span class="material-icons">edit</span></button> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Actualizar Venta</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label for="identificador" class="form-label">Identificador</label>
+                                            <input type="text" class="form-control" id="identificador" value="Fac003" disabled>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label for="fecha" class="form-label">Fecha de la venta</label>
+                                            <input type="date" class="form-control" id="fecha" value="2021-10-01">
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label for="nombre" class="form-label">Nombre del cliente</label>
+                                            <input type="text" class="form-control" id="nombre" value="John Conor">
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label for="documento" class="form-label">Documento de identidad</label>
+                                            <input type="number" class="form-control" id="documento" value="123465132">
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label for="producto" class="form-label">Producto</label>
+                                            <div class="d-flex">
+                                                <select class="form-select" aria-label="Default select example" id="producto">
+                                                    <option >---------</option>
+                                                    <option value="0">Producto 1</option>
+                                                    <option value="2">Producto 2</option>
+                                                    <option value="3" selected>Producto 3</option>
+                                                    <option value="4">Producto 4</option>
+                                                    <option value="5">Producto 5</option>
+                                                    <option value="6">Producto 6</option>                                
+                                                </select>
+                                                <!-- <button type="submit" class="btn btn-primary ms-2">Agregar</button> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label for="preciounitario" class="form-label">Precio unitario</label>
+                                            <input type="number" class="form-control" id="preciounitario" value="1100">
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label for="idVendedor" class="form-label">Identificador del vendedor</label>
+                                            <input type="number" class="form-control" id="idVendedor" value="98653214">
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label for="totalVenta" class="form-label">Valor total venta</label>
+                                            <input type="number" class="form-control" id="totalVenta" value="1100">
+                                        </div>
+                                        <!-- <div class="container-fluid text-center">
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div> -->
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
