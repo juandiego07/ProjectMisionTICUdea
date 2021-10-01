@@ -54,7 +54,6 @@
 
         div.content {
             margin-left: 200px;
-            padding: 1px 16px;
             height: 1000px;
         }
 
@@ -81,12 +80,12 @@
             }
         }
 
-        .module-title{
+        .module-title {
             font-size: 21px;
         }
     </style>
 </head>
-<body>
+<body onload="initElement();">
 <div class="sidebar">
     <a class="logo" href="#bank">
         <div class="d-flex align-items-center"><span class="material-icons pe-2">account_balance</span><span>Banco Estatal</span>
@@ -133,6 +132,11 @@
                 </div>
             </div>
         </div>
+        <div id="sucessAlert" class="alert alert-success alert-dismissible fade show" role="alert"
+             style="display:none;">
+            <div>Operación exitosa!</div>
+            <button id="closeBtn" type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
         <div class="card">
             <div class="card-header border-primary">
                 <strong class="text-primary">Servicio</strong>
@@ -165,7 +169,7 @@
                             <textarea class="form-control" id="descripcion" rows="3"></textarea>
                         </div>
                         <div class="container-fluid text-center">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button id="submitForm" type="button" class="btn btn-primary">Guardar</button>
                         </div>
                     </div>
                 </form>
@@ -173,5 +177,40 @@
         </div>
     </div>
 </div>
+
+<script>
+    function initElement() {
+        var close = document.getElementById("closeBtn");
+        var show = document.getElementById("submitForm");
+        close.onclick = closeAlert;
+        show.onclick = showAlert;
+        var res = httpGet('https://my-json-server.typicode.com/jdiego07-epayco/DataBase/facturas');
+        console.log("res", res);
+    }
+
+    function closeAlert() {
+        document.getElementById('sucessAlert').style.display = 'none';
+    }
+
+    function showAlert() {
+        document.getElementById('sucessAlert').style.display = 'block';
+    }
+
+    // $(document).ready(function () {
+    //     $("#closeBtn").click(function () {
+    //         $('#sucessAlert').hide();
+    //     });
+    //     $("#submitForm").click(function () {
+    //         $('#sucessAlert').show();
+    //     });
+    // });
+    function httpGet(theUrl) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
+</script>
+
 </body>
 </html>
