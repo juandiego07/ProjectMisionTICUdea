@@ -76,3 +76,7 @@ div.content {
     color: #ffffff;
     text-decoration: none;
 }
+
+label>span {
+    color: #ff0000;
+}
