@@ -62,64 +62,75 @@
                     <strong class="text-primary">Venta</strong>
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="identificador" class="form-label">Identificador</label>
-                                <input type="text" class="form-control" id="identificador">
+                    <form class="row g-3 needs-validation" novalidate>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="identificador" class="form-label">Identificador <span>*</span></label>
+                            <input type="text" class="form-control" id="identificador" required>
+                            <div class="invalid-feedback">Campo obligatorio</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="fecha" class="form-label">Fecha de la venta <span>*</span></label>
+                            <input type="date" class="form-control" id="fecha" required>
+                            <div class="invalid-feedback">Campo obligatorio</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="nombre" class="form-label">Nombre del cliente <span>*</span></label>
+                            <input type="text" class="form-control" id="nombre" required>
+                            <div class="invalid-feedback">Campo obligatorio</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="documento" class="form-label">Documento de identidad <span>*</span></label>
+                            <input type="number" class="form-control" id="documento" required>
+                            <div class="invalid-feedback">Campo obligatorio</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="producto" class="form-label">Producto <span>*</span></label>
+                            <div class="d-flex">
+                                <select class="form-select" aria-label="Default select example" id="producto" required>
+                                    <option selected></option>
+                                    <option value="1">Cuenta ahorro</option>
+                                    <option value="2">Cuenta corriente</option>
+                                    <option value="3">Crédito de vivienda</option>
+                                    <option value="4">Crédito de libre inversión</option>
+                                    <option value="5">Crédito de vehiculo</option>
+                                    <option value="6">Crédito de libranza</option>
+                                    <option value="7">Crédito de estudio</option> 
+                                    <option value="8">Tarjeta de debito</option>
+                                    <option value="9">Tarjeta de credito</option>
+                                    <option value="10">Seguro de vida</option>
+                                </select>
+                                <!-- <button type="submit" class="btn btn-primary me-2">Agregar</button> -->
                             </div>
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="fecha" class="form-label">Fecha de la venta</label>
-                                <input type="date" class="form-control" id="fecha">
-                            </div>
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="nombre" class="form-label">Nombre del cliente</label>
-                                <input type="text" class="form-control" id="nombre">
-                            </div>
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="documento" class="form-label">Documento de identidad</label>
-                                <input type="number" class="form-control" id="documento">
-                            </div>
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="producto" class="form-label">Producto</label>
-                                <div class="d-flex">
-                                    <select class="form-select" aria-label="Default select example" id="producto">
-                                        <option selected>---------</option>
-                                        <option value="0">Producto 1</option>
-                                        <option value="2">Producto 2</option>
-                                        <option value="3">Producto 3</option>
-                                        <option value="4">Producto 4</option>
-                                        <option value="5">Producto 5</option>
-                                        <option value="6">Producto 6</option>                                
-                                    </select>
-                                    <!-- <button type="submit" class="btn btn-primary me-2">Agregar</button> -->
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="preciounitario" class="form-label">Precio unitario</label>
-                                <input type="number" class="form-control" id="preciounitario">
-                            </div>
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="idVendedor" class="form-label">Identificador del vendedor</label>
-                                <input type="number" class="form-control" id="idVendedor">
-                            </div>
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="totalVenta" class="form-label">Valor total venta</label>
-                                <input type="number" class="form-control" id="totalVenta">
-                            </div>
-                            <!-- <div class="col-12 col-md-6 mb-3">
+                            <div class="invalid-feedback">Campo obligatorio <span>*</span></div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="preciounitario" class="form-label">Precio unitario <span>*</span></label>
+                            <input type="number" class="form-control" id="preciounitario" required>
+                            <div class="invalid-feedback">Campo obligatorio</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="idVendedor" class="form-label">Identificador del vendedor <span>*</span></label>
+                            <input type="number" class="form-control" id="idVendedor" required>
+                            <div class="invalid-feedback">Campo obligatorio</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="totalVenta" class="form-label">Valor total venta <span>*</span></label>
+                            <input type="number" class="form-control" id="totalVenta" required>
+                            <div class="invalid-feedback">Campo obligatorio</div>
+                        </div>
+                        <!-- <div class="col-12 col-md-6 mb-3">
                                 <label for="descripcion" class="form-label">Descripción</label>
                                 <textarea class="form-control" id="descripcion" rows="3"></textarea>
                             </div> -->
-                            <div class="container-fluid text-center">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
+                        <div class="container-fluid text-center">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src="/banco-del-estado-frontend/templates/js/validate.js"></script>
 </body>
 
 </html>
