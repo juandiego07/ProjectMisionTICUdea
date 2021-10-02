@@ -87,6 +87,10 @@
             color: #ffffff;
             text-decoration: none;
         }
+        
+        label>span {
+            color: #ff0000;
+        }
     </style>
 </head>
 
@@ -144,34 +148,39 @@
                     <strong class="text-primary">Servicio</strong>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="identificador" class="form-label">Identificador</label>
-                                <input type="text" class="form-control" id="identificador">
+                                <label for="identificador" class="form-label">Identificador <span>*</span></label>
+                                <input type="text" class="form-control" id="identificador" required>
+                                <div class="invalid-feedback">Campo obligatorio</div>
                             </div>
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre">
+                                <label for="nombre" class="form-label">Nombre <span>*</span></label>
+                                <input type="text" class="form-control" id="nombre" required>
+                                <div class="invalid-feedback">Campo obligatorio</div>
                             </div>
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="valorUnitario" class="form-label">Valor Unitario</label>
-                                <input type="number" class="form-control" id="valorUnitario">
+                                <label for="valorUnitario" class="form-label">Valor Unitario <span>*</span></label>
+                                <input type="number" class="form-control" id="valorUnitario" required>
+                                <div class="invalid-feedback">Campo obligatorio</div>
                             </div>
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="estado" class="form-label">Estado</label>
-                                <select class="form-select" aria-label="Default select example" id="estado">
-                                <option selected>---------</option>
-                                <option value="0">Disponible</option>
-                                <option value="2">No disponible</option>
-                            </select>
+                                <label for="estado" class="form-label">Estado <span>*</span></label>
+                                <select class="form-select" aria-label="Default select example" id="estado" required>
+                                    <option selected></option>
+                                    <option value="1">Disponible</option>
+                                    <option value="2">No disponible</option>
+                                </select>
+                                <div class="invalid-feedback">Campo obligatorio</div>
                             </div>
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="descripcion" class="form-label">Descripción</label>
-                                <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                                <label for="descripcion" class="form-label">Descripción <span>*</span></label>
+                                <textarea class="form-control" id="descripcion" rows="3" required></textarea>
+                                <div class="invalid-feedback">Campo obligatorio</div>
                             </div>
                             <div class="container-fluid text-center">
-                                <button id="submitForm" type="button" class="btn btn-primary">Guardar</button>
+                                <button id="submitForm" type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -179,6 +188,8 @@
             </div>
         </div>
     </div>
+
+    <script src="/banco-del-estado-frontend/templates/js/validate.js"></script>
 
     <script>
         function initElement() {
