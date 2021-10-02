@@ -88,6 +88,10 @@
             color: #ffffff;
             text-decoration: none;
         }
+        
+        label>span {
+            color: #ff0000;
+        }
     </style>
 </head>
 
@@ -145,7 +149,7 @@
                     <strong class="text-primary">Usuario</strong>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="fieldName" class="form-label">Nombre de usuario</label>
@@ -156,24 +160,25 @@
                                 <input type="email" class="form-control" id="fieldEmail" placeholder="name@example.com" disabled readonly>
                             </div>
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="selectState" class="form-label">Estado</label>
-                                <select class="form-select form-select-md" aria-label=".form-select-md example" id="selectState">
-                                <option selected>---------</option>
-                                <option value="1">Pendiente</option>
-                                <option value="2">Autorizado</option>
-                                <option value="3">No autorizado</option>
-                            </select>
+                                <label for="selectState" class="form-label">Estado <span>*</span></label>
+                                <select class="form-select form-select-md" aria-label=".form-select-md example" id="selectState" required>
+                                    <option value="1">Pendiente</option>
+                                    <option value="2">Autorizado</option>
+                                    <option value="3">No autorizado</option>
+                                </select>
+                                <div class="invalid-feedback">Campo obligatorio</div>
                             </div>
                             <div class="col-12 col-md-6 mb-3">
-                                <label for="selectRol" class="form-label">Rol</label>
-                                <select class="form-select form-select-md" aria-label=".form-select-md example" id="selectRol">
-                                <option selected>---------</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Vendedor</option>
-                            </select>
+                                <label for="selectRol" class="form-label">Rol <span>*</span></label>
+                                <select class="form-select form-select-md" aria-label=".form-select-md example" id="selectRol" required>
+                                    <option selected></option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Vendedor</option>
+                                </select>
+                                <div class="invalid-feedback">Campo obligatorio</div>
                             </div>
                             <div class="container-fluid text-center">
-                                <button id="submitForm" type="button" class="btn btn-primary">Guardar</button>
+                                <button id="submitForm" type="submit" class="btn btn-primary">Guardar</button>
                                 <!-- <button id="prueba" type="button" class="btn btn-primary">prueba</button> -->
                             </div>
                         </div>
@@ -182,6 +187,8 @@
             </div>
         </div>
     </div>
+
+    <script src="/banco-del-estado-frontend/templates/js/validate.js"></script>
 
     <script>
         function initElement() {

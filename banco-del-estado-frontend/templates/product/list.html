@@ -95,6 +95,10 @@
         color: #ffffff;
         text-decoration: none;
     }
+    
+    label>span {
+        color: #ff0000;
+    }
 </style>
 </head>
 
@@ -229,53 +233,58 @@
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Actualizar Producto</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
+                    <form class="needs-validation" novalidate>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Actualizar Producto</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12 col-md-6 mb-3">
                                         <label for="identificador" class="form-label">Identificador</label>
                                         <input type="text" class="form-control" id="identificador" value="CC" disabled>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label for="nombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" value="Cuenta corriente">
+                                        <label for="nombre" class="form-label">Nombre <span>*</span></label>
+                                        <input type="text" class="form-control" id="nombre" value="Cuenta corriente" required>
+                                        <div class="invalid-feedback">Campo obligatorio</div>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label for="valorUnitario" class="form-label">Valor Unitario</label>
-                                        <input type="number" class="form-control" id="valorUnitario" value="1200">
+                                        <label for="valorUnitario" class="form-label">Valor Unitario <span>*</span></label>
+                                        <input type="number" class="form-control" id="valorUnitario" value="1200" required>
+                                        <div class="invalid-feedback">Campo obligatorio</div>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label for="estado" class="form-label">Estado</label>
-                                        <select class="form-select" aria-label="Default select example" id="estado">
+                                        <label for="estado" class="form-label">Estado <span>*</span></label>
+                                        <select class="form-select" aria-label="Default select example" id="estado" required>
                                             <!-- <option selected>---------</option> -->
                                             <option value="0" selected>Disponible</option>
                                             <option value="2">No disponible</option>
                                         </select>
+                                        <div class="invalid-feedback">Campo obligatorio</div>
                                     </div>
                                     <div class="col-12">
-                                        <label for="descripcion" class="form-label">Descripción</label>
-                                        <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                                        <label for="descripcion" class="form-label">Descripción <span>*</span></label>
+                                        <textarea class="form-control" id="descripcion" rows="3" required></textarea>
+                                        <div class="invalid-feedback">Campo obligatorio</div>
                                     </div>
                                     <!-- <div class="container-fluid text-center">
-                                    <button id="submitForm" type="button" class="btn btn-primary">Guardar</button>
-                                </div> -->
+                                        <button id="submitForm" type="button" class="btn btn-primary">Guardar</button>
+                                    </div> -->
                                 </div>
-                            </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Actualizar</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src="/banco-del-estado-frontend/templates/js/validate.js"></script>
 </body>
 
 </html>
