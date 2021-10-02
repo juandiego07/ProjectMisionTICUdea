@@ -179,78 +179,87 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Actualizar Venta</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
+                            <form action="/banco-del-estado-frontend/templates/sales/list.html" class="needs-validation" novalidate method="GET">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Actualizar Venta</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
                                     <div class="row">
                                         <div class="col-12 col-md-6 mb-3">
                                             <label for="identificador" class="form-label">Identificador</label>
                                             <input type="text" class="form-control" id="identificador" value="Fac003" disabled>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <label for="fecha" class="form-label">Fecha de la venta</label>
-                                            <input type="date" class="form-control" id="fecha" value="2021-10-01">
+                                            <label for="fecha" class="form-label">Fecha de la venta <span>*</span></label>
+                                            <input type="date" class="form-control" id="fecha" value="2021-10-01" required>
+                                            <div class="invalid-feedback">Campo obligatorio</div>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <label for="nombre" class="form-label">Nombre del cliente</label>
-                                            <input type="text" class="form-control" id="nombre" value="John Conor">
+                                            <label for="nombre" class="form-label">Nombre del cliente <span>*</span></label>
+                                            <input type="text" class="form-control" id="nombre" value="John Conor" required>
+                                            <div class="invalid-feedback">Campo obligatorio</div>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <label for="documento" class="form-label">Documento de identidad</label>
-                                            <input type="number" class="form-control" id="documento" value="123465132">
+                                            <label for="documento" class="form-label">Documento de identidad <span>*</span></label>
+                                            <input type="number" class="form-control" id="documento" value="123465132" required>
+                                            <div class="invalid-feedback">Campo obligatorio</div>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <label for="producto" class="form-label">Producto</label>
+                                            <label for="producto" class="form-label">Producto <span>*</span></label>
                                             <div class="d-flex">
-                                                <select class="form-select" aria-label="Default select example" id="producto">
-                                                    <option >---------</option>
-                                                    <option value="0">Producto 1</option>
-                                                    <option value="2">Producto 2</option>
-                                                    <option value="3" selected>Producto 3</option>
-                                                    <option value="4">Producto 4</option>
-                                                    <option value="5">Producto 5</option>
-                                                    <option value="6">Producto 6</option>                                
+                                                <select class="form-select" aria-label="Default select example" id="producto" required>
+                                                    <option value="1">Cuenta ahorro</option>
+                                                    <option value="2">Cuenta corriente</option>
+                                                    <option value="3">Crédito de vivienda</option>
+                                                    <option value="4">Crédito de libre inversión</option>
+                                                    <option value="5">Crédito de vehiculo</option>
+                                                    <option value="6">Crédito de libranza</option>
+                                                    <option value="7">Crédito de estudio</option> 
+                                                    <option value="8">Tarjeta de debito</option>
+                                                    <option value="9">Tarjeta de credito</option>
+                                                    <option value="10">Seguro de vida</option>                           
                                                 </select>
                                                 <!-- <button type="submit" class="btn btn-primary ms-2">Agregar</button> -->
                                             </div>
+                                            <div class="invalid-feedback">Campo obligatorio</div>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <label for="preciounitario" class="form-label">Precio unitario</label>
-                                            <input type="number" class="form-control" id="preciounitario" value="1100">
+                                            <label for="preciounitario" class="form-label">Precio unitario <span>*</span></label>
+                                            <input type="number" class="form-control" id="preciounitario" value="1100" required>
+                                            <div class="invalid-feedback">Campo obligatorio</div>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <label for="idVendedor" class="form-label">Identificador del vendedor</label>
-                                            <input type="number" class="form-control" id="idVendedor" value="98653214">
+                                            <label for="idVendedor" class="form-label">Identificador del vendedor <span>*</span></label>
+                                            <input type="number" class="form-control" id="idVendedor" value="98653214" required>
+                                            <div class="invalid-feedback">Campo obligatorio</div>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <label for="totalVenta" class="form-label">Valor total venta</label>
-                                            <input type="number" class="form-control" id="totalVenta" value="1100">
+                                            <label for="totalVenta" class="form-label">Valor total venta <span>*</span></label>
+                                            <input type="number" class="form-control" id="totalVenta" value="1100" required>
+                                            <div class="invalid-feedback">Campo obligatorio</div>
                                         </div>
                                         <!-- <div class="container-fluid text-center">
                                             <button type="submit" class="btn btn-primary">Guardar</button>
                                         </div> -->
                                     </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Actualizar</button>
-                            </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+    <script src="/banco-del-estado-frontend/templates/js/validate.js"></script>
 </body>
 
 </html>
