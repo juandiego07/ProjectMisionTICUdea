@@ -1,12 +1,4 @@
-import { Link } from "react-router-dom";
-// import './estilosLogin.css';
-
 export default function Login() {
-
-const formu =  document.getElementById('formulario')
-function validar() {
-  formu.addEventListener('submit', (e) => e.preventDefault())
-}
 
   return (
     <div className="contenedor">
@@ -15,7 +7,7 @@ function validar() {
         <span>Banco del Estado</span>
       </div>
       <div>
-        <form action="/ventas" method="get" id="formulario">
+        <form id="formulario" action="/ventas">
           <input className="form-control" type="text" placeholder="Usuario" />
           <input
             type="text"
@@ -23,17 +15,11 @@ function validar() {
             placeholder="Contraseña"
           />
           <div className="divBotonLogin">
-            <input
+            <button
+            id="btnIngresar"
+            type="submit"
               className="btn boton"
-              type="submit"
-              onClick={validar}
-              value="Ingresar"
-            />
-          </div>
-          <div className="divBotonLogin">
-            <Link to="/ventas" className="btn boton">
-              Login con Google
-            </Link>
+            >Ingresar con google</button>
           </div>
         </form>
       </div>

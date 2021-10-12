@@ -10,7 +10,6 @@ const app = window.firebase.initializeApp({
 
 export const database = window.firebase.firestore();
 export default app;
-// Base de datos
 export async function guardarRegistro(task) {
   try {
     const respuesta = await window.firebase.firestore().collection("products").add(task);
@@ -21,16 +20,25 @@ export async function guardarRegistro(task) {
 }
 
 export async function obtenerRegistro(collection) {
-  // try {
-    // const list = []
+  try {
     const response = await window.firebase.firestore().collection(collection).get();
-    // response.forEach(function(item){
-    //   console.log(item.data())
-    //   list.push(item.data())
-    // })
-    // return list
     return response
-  // } catch (error) {
-  //   throw new Error(error);
-  // }
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+
+const auth = window.firebase.auth();
+const provider = new window.firebase.auth.GoogleAuthProvider();
+
+export async function login() {
+  try {
+    const response = await auth.signInWithPopup(provider)
+    return response
+  } catch (error) {
+    console.log(error)
+    throw new Error(error)
+  }
+
 }

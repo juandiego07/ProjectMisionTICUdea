@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from "react";
 import Sales from "../Sales";
 import Login from "../Login";
 import Products from "../Products";
@@ -8,7 +7,6 @@ import React from "react";
 
 export default function Routes() {
 
-  const [isLogedd, setIsLogedd] = useState(false);
 
   return (
     <Router>
@@ -17,7 +15,7 @@ export default function Routes() {
           <Login></Login>
         </Route>
         <Route path="/ventas" exact>
-          <Sales state={isLogedd}></Sales>
+          <Sales></Sales>
         </Route>
         <Route path="/productos" exact>
           <Products></Products>
