@@ -1,22 +1,22 @@
 import "./Style.css";
 export default function Login() {
   return (
-    <div className="contenedor container-fluid">
+    <div className="body container-fluid ">
       <div className="row">
-        <div className="imagenBanco col-8 col-sm-6 col-md-5 col-lg-3 m-auto">
+        <div className="imagenBanco col-12 col-sm-10 col-lg-8 m-auto mt-2">
           <span className="material-icons pe-2">account_balance</span>
           <span>Banco del Estado</span>
         </div>
         <div>
           <form id="formulario" action="/ventas">
-            <div className="col-8 col-sm-6 col-md-5 col-lg-3 m-auto">
+            <div className="col-12 col-sm-10 col-lg-8 m-auto mt-2">
               <input
                 className="form-control"
                 type="text"
                 placeholder="Usuario"
               />
             </div>
-            <div className="col-8 col-sm-6 col-md-5 col-lg-3 m-auto">
+            <div className="col-12 col-sm-10 col-lg-8 m-auto mt-2">
               <input
                 type="text"
                 className="form-control"
@@ -24,7 +24,7 @@ export default function Login() {
               />
             </div>
 
-            <div className="divBotonLogin col-5 col-sm-4 col-md-3 col-lg-2 m-auto mt-3">
+            <div className="divBotonLogin col-12 col-sm-10 col-lg-8 m-auto mt-3">
               <button id="btnIngresar" type="submit" className="btn boton ">
                 Ingresar con google
               </button>

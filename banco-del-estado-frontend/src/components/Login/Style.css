@@ -1,25 +1,15 @@
-.contenedor{
-    width: 100vw;
-    display: block;
-    height:  200px;
-    margin: auto;
-}
-
-body{
+.body{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     background-image: url(cover.jpg);
     background-repeat: no-repeat; 
     background-size: cover; 
     position: relative;
 }
 
-input{
-    margin-top: 15px;
-}
 
 .divBotonLogin{
     display: flex;
@@ -29,8 +19,8 @@ input{
 
 .imagenBanco{
     background-color:   #d1c48b;
-    height: 50px;
-    display: flex;
+    display: flex; 
+    padding: .75rem;
     justify-content: center;
     align-items: center;
 }
@@ -38,6 +28,6 @@ input{
 .boton{  
    background-color: #d1c48b;
    text-decoration: none;
-   width: 100vw;
+   /* width: 75vw; */
 }
 
