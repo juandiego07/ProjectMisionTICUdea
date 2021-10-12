@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Sales from "../Sales";
+import Home from "../Layout/Home";
 import Login from "../Login";
+import Sales from "../Sales";
 import Products from "../Products";
-import Form from "../Products/Form";
-import React from "react";
+import Users from "../Users";
 
 export default function Routes() {
-
 
   return (
     <Router>
@@ -14,14 +13,17 @@ export default function Routes() {
         <Route path="/" exact>
           <Login></Login>
         </Route>
-        <Route path="/ventas" exact>
-          <Sales></Sales>
+        <Route path="/Home" exact>
+          <Home></Home>
         </Route>
-        <Route path="/productos" exact>
+        <Route path="/Users" exact>
+          <Users></Users>
+        </Route>
+        <Route path="/Products" exact>
           <Products></Products>
         </Route>
-        <Route path="/productos/registrar" exact>
-          <Form></Form>
+        <Route path="/Sales" exact>
+          <Sales></Sales>
         </Route>
       </Switch>
     </Router>
