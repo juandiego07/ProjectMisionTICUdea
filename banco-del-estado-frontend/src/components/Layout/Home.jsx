@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import "./Style.css"
 
 export default function Home() {
     return (
