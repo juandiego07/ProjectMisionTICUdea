@@ -1,18 +1,16 @@
 import { Fragment } from "react";
-import Menu from "../Layout/Menu";
-import Header from "../Layout/Header";
 import Banner from "../Layout/Banner";
-import Form from "./Form";
+import Header from "../Layout/Header";
+import Menu from "../Layout/Menu";
 
-export default function Products() {
+export default function Users() {
   return (
     <Fragment>
       <Menu></Menu>
       <div className="content">
         <Header></Header>
         <div className="container">
-          <Banner text={"Lista de produtos"}></Banner>
-          <Form></Form>
+          <Banner text={"Listado de usuarios"}></Banner>
         </div>
       </div>
     </Fragment>

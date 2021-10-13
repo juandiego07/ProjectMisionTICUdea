@@ -1,8 +1,5 @@
 import { Fragment, useState } from "react";
 import { guardarRegistro } from "../../Firebase";
-import Menu from "../Layout/Menu";
-import Banner from "../Layout/Banner";
-import Header from "../Layout/Header";
 import swal from 'sweetalert';
 
 export default function Form() {
@@ -61,14 +58,6 @@ export default function Form() {
 
   return (
     <Fragment>
-      <Menu></Menu>
-      <div className="content">
-        <Header></Header>
-        <div className="container">
-          <Banner text={"Registro de produtos"}></Banner>
-          <Form></Form>
-        </div>
-      </div>
       <div className="card">
         <div className="card-header border-primary">
           <strong className="text-primary">Servicio</strong>
