@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "../Layout/Home";
 import Login from "../Login";
-import Sales from "../Sales";
 import Products from "../Products";
+import Sales from "../Sales";
 import Users from "../Users";
 
 export default function Routes() {
