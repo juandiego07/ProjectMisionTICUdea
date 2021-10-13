@@ -10,7 +10,7 @@ export default function Products() {
       <div className="content">
         <Header></Header>
         <div className="container">
-          <Banner text={"Lista de produtos"}></Banner>
+          <Banner text={"Listado de productos"}></Banner>
         </div>
       </div>
     </Fragment>
