@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Style.css";
 export default function Login() {
   return (
@@ -8,7 +9,7 @@ export default function Login() {
           <span>Banco del Estado</span>
         </div>
         <div>
-          <form id="formulario" action="/ventas">
+          <form id="formulario" action="/home">
             <div className="col-12 col-sm-10 col-lg-8 m-auto mt-2">
               <input
                 className="form-control"
@@ -25,9 +26,12 @@ export default function Login() {
             </div>
 
             <div className="divBotonLogin col-12 col-sm-10 col-lg-8 m-auto mt-3">
-              <button id="btnIngresar" type="submit" className="btn boton ">
+              {/* <button id="btnIngresar" type="submit" className="btn boton ">
                 Ingresar con google
-              </button>
+              </button> */}
+              <Link className="btn boton" to="/home">
+                Ingresar con google
+              </Link>
             </div>
           </form>
         </div>

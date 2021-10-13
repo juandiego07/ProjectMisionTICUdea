@@ -6,7 +6,7 @@ import Menu from "../Layout/Menu";
 export default function Users() {
   return (
     <Fragment>
-      <Menu></Menu>
+      <Menu isActive={"users"}></Menu>
       <div className="content">
         <Header></Header>
         <div className="container">

@@ -1,41 +1,43 @@
+import { Link } from "react-router-dom";
 import "../Style.css";
 
-export default function Menu() {
+export default function Menu({ isActive = null }) {
   return (
     <div className="sidebar">
-      <a className="logo" href="#bank">
+      <Link className="logo" to="/home">
         <div className="d-flex align-items-center">
           <span className="material-icons pe-2">account_balance</span>
           <span>Banco Estatal</span>
         </div>
-      </a>
-      <a href="/">
+      </Link>
+      <Link to="/">
         <div className="d-flex align-items-center">
           <span className="material-icons pe-2">logout</span>
           <span>Cerrar sesión</span>
         </div>
-      </a>
-      <a href="/">
+      </Link>
+      <Link className={isActive === "users" ? "active" : ""} to="/users">
         <div className="d-flex align-items-center">
           <span className="material-icons pe-2">account_circle</span>
           <span>Usuarios</span>
         </div>
-      </a>
-      <a href="/productos">
+      </Link>
+      <Link className={isActive === "products" ? "active" : ""} to="/products">
         <div className="d-flex align-items-center">
           <span className="material-icons pe-2">home_repair_service</span>
           <span>Servicios</span>
         </div>
-      </a>
-      <a
-        className="active"
-        href="/ventas"
+      </Link>
+      <Link
+        className={isActive === "sales" ? "active" : ""}
+        href="/sales"
+        to="/sales"
       >
         <div className="d-flex align-items-center">
           <span className="material-icons pe-2">receipt_long</span>
           <span>Ventas</span>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

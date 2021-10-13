@@ -15,7 +15,7 @@ export default function Sales() {
   // }
   return (
     <Fragment>
-      <Menu></Menu>
+      <Menu isActive={"sales"}></Menu>
       <div className="content">
         <Header></Header>
         <div className="container">
