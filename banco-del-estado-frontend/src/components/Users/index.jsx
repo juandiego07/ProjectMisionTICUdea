@@ -6,11 +6,11 @@ import Menu from "../Layout/Menu";
 export default function Users() {
   return (
     <Fragment>
-      <Menu></Menu>
+      <Menu isActive={"users"}></Menu>
       <div className="content">
         <Header></Header>
         <div className="container">
-          <Banner text={"Listado de usuarios"}></Banner>
+          <Banner text={"usuarios"}></Banner>
         </div>
       </div>
     </Fragment>

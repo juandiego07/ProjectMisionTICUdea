@@ -1,59 +1,25 @@
-import { Fragment, useState } from "react";
-import { guardarRegistro } from "../../Firebase";
-import swal from 'sweetalert';
+import { Fragment } from "react";
+import { saveData, getId } from "../../Firebase";
+// import {v4 as uuidv4} from "uuid";
 
-export default function Form() {
-  const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [state, setState] = useState("");
-  const [description, setDescription] = useState("");
-  const formu = document.getElementById("formulario");
-
-  function validar() {
-    formu.addEventListener("submit", (e) => e.preventDefault());
-    if (
-      id !== "" &&
-      name !== "" &&
-      price !== "" &&
-      state !== "" &&
-      description !== ""
-    ) {
-      const obj = {
-        id: id,
-        name: name,
-        price: price,
-        state: state,
-        description: description,
-      };
-      console.log("Entro");
-      try {
-          saveProduct(obj);
-          swal(
-            "Felicidades",
-            "Registro se guardo correctamente",
-            "success"
-          );
-      } catch (error) {
-          swal("Lo siento", "Registro no se guardo correctamente", "error");
-          throw new error();
-      }
-      limpiar()
-      formu.reset()
-    }
-  }
-
-  function limpiar(){
-      setId("");
-      setName("");
-      setPrice("");
-      setState("");
-      setDescription("");
-  }
-
-  async function saveProduct(obj) {
-    const response = await guardarRegistro(obj);
-    console.log(response);
+export default function Form({ handlerCancel }) {
+  async function handleSave(props) {
+    const data = {
+      id: getId(),
+      idRef: document.getElementById("id").value,
+      name: document.getElementById("name").value,
+      price: document.getElementById("price").value,
+      state: document.getElementById("state").value,
+      description: document.getElementById("description").value,
+    };
+    await saveData("products", data);
+    // console.log(await saveData("products", data));
+    // console.log(await getData("products"));
+    // console.log(typeof await getData("products"));
+    // const test = await getData("products");
+    //  test.forEach((item) => {
+    //   console.log(item.id);
+    // });
   }
 
   return (
@@ -63,7 +29,7 @@ export default function Form() {
           <strong className="text-primary">Servicio</strong>
         </div>
         <div className="card-body">
-          <form className="needs-validation" id="formulario">
+          <form id="formulario">
             <div className="row">
               <div className="col-12 col-md-6 mb-3">
                 <label className="form-label">
@@ -75,9 +41,6 @@ export default function Form() {
                   id="id"
                   autoComplete="off"
                   required
-                  onChange={({ target: { value } }) => {
-                    setId(value);
-                  }}
                 />
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>
@@ -91,9 +54,6 @@ export default function Form() {
                   id="name"
                   autoComplete="off"
                   required
-                  onChange={({ target: { value } }) => {
-                    setName(value);
-                  }}
                 />
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>
@@ -106,9 +66,6 @@ export default function Form() {
                   className="form-control"
                   id="price"
                   required
-                  onChange={({ target: { value } }) => {
-                    setPrice(value);
-                  }}
                 />
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>
@@ -121,13 +78,10 @@ export default function Form() {
                   aria-label="Default select example"
                   id="state"
                   required
-                  onChange={({ target: { value } }) => {
-                    setState(value);
-                  }}
                 >
                   <option defaultValue=""></option>
-                  <option value="1">Disponible</option>
-                  <option value="2">No disponible</option>
+                  <option value="Disponible">Disponible</option>
+                  <option value="No disponible">No disponible</option>
                 </select>
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>
@@ -140,20 +94,25 @@ export default function Form() {
                   id="description"
                   rows="3"
                   required
-                  onChange={({ target: { value } }) => {
-                    setDescription(value);
-                  }}
                 ></textarea>
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>
-              <div className="container-fluid text-center">
+              <div className="text-center">
                 <button
                   id="submitForm"
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={validar}
+                  type="button"
+                  className="btn btn-primary mx-2"
+                  onClick={handleSave}
                 >
                   Guardar
+                </button>
+                <button
+                  id="cancel"
+                  type="reset"
+                  className="btn btn-primary mx-2"
+                  onClick={handlerCancel}
+                >
+                  Cancelar
                 </button>
               </div>
             </div>

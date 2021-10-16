@@ -11,7 +11,7 @@ export default function Home() {
       <div className="content">
         <Header></Header>
         <div className="container">
-          <Banner text={"Bienvenido al sistema"}></Banner>
+          <Banner text={"Bienvenido al sistema"} home={true}></Banner>
         </div>
       </div>
     </Fragment>

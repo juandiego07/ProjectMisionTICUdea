@@ -1,8 +1,7 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-export default function Item(dato) {
-  console.log(dato);
+export default function Item(props) {
   return (
     <Fragment>
       <div className="card pb-3 pt-3 mb-3">
@@ -14,23 +13,23 @@ export default function Item(dato) {
                   <p className="text-muted text-capitalize mb-0">
                     Nombre de producto
                   </p>
-                  <div></div>
+                  <div>{props.value.name}</div>
                 </div>
                 <div className="col-12 col-md-3 col-sm-6">
                   <p className="text-muted text-capitalize mb-0">
                     Identificador
                   </p>
-                  <div></div>
+                  <div>{props.value.idRef}</div>
                 </div>
                 <div className="col-12 col-md-3 col-sm-6">
                   <p className="text-muted text-capitalize mb-0">Estado</p>
-                  <div></div>
+                  <div>{props.value.state}</div>
                 </div>
                 <div className="col-12 col-md-3 col-sm-6">
                   <p className="text-muted text-capitalize mb-0">
                     Valor unitario
                   </p>
-                  <div></div>
+                  <div>{props.value.price}</div>
                 </div>
               </div>
             </div>
@@ -40,7 +39,7 @@ export default function Item(dato) {
                   className="gx-btn gx-btn-lg gx-flat-btn text-muted p-1 m-0"
                   data-toggle="tooltip"
                   title="Editar"
-                  to="/productos/registrar"
+                  to=""
                 >
                   <span className="material-icons">edit</span>
                 </Link>
