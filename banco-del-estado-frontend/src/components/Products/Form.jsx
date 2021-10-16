@@ -80,8 +80,8 @@ export default function Form({ handlerCancel }) {
                   required
                 >
                   <option defaultValue=""></option>
-                  <option value="1">Disponible</option>
-                  <option value="2">No disponible</option>
+                  <option value="Disponible">Disponible</option>
+                  <option value="No disponible">No disponible</option>
                 </select>
                 <div className="invalid-feedback">Campo obligatorio</div>
               </div>

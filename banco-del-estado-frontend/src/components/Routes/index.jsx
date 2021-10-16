@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route,} from "react-router-dom";
 import Home from "../Layout/Home";
 import Login from "../Login";
 import Products from "../Products";
@@ -10,20 +10,20 @@ export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact>
-          <Login></Login>
-        </Route>
-        <Route path="/Home" exact>
-          <Home></Home>
+        <Route path="/Products" exact>
+          <Products></Products>
         </Route>
         <Route path="/Users" exact>
           <Users></Users>
         </Route>
-        <Route path="/Products" exact>
-          <Products></Products>
-        </Route>
         <Route path="/Sales" exact>
           <Sales></Sales>
+        </Route>
+        <Route path="/Home" exact>
+          <Home></Home>
+        </Route>
+        <Route path="/" exact>
+          <Login></Login>
         </Route>
       </Switch>
     </Router>

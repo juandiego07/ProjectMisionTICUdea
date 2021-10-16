@@ -16,7 +16,7 @@ export default function List(props) {
   return (
     <Fragment>
       {productList.map((data) => {
-        return <Item keys={data.id} value={data}></Item>;
+        return <Item key={data.id} value={data}></Item>;
       })}
     </Fragment>
   );
