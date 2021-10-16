@@ -1,4 +1,18 @@
-const app = window.firebase.initializeApp({
+
+import { initializeApp } from "firebase/app";
+
+import { getFirestore } from "firebase/firestore";
+
+// import { getAuth, } from "firebase/auth";
+//  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
+
+import { addDoc, collection, getDocs, query} from 'firebase/firestore';
+//  getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
+
+import {v4 as uuidv4} from "uuid";
+
+// Inicialización de llaves para conexión a Firebase
+const firebaseConfig  = {
   apiKey: "AIzaSyB5E__etU6IXlhswKakyRM88eXABPQRbUE",
   authDomain: "list-task-78971.firebaseapp.com",
   projectId: "list-task-78971",
@@ -6,39 +20,46 @@ const app = window.firebase.initializeApp({
   messagingSenderId: "418201574141",
   appId: "1:418201574141:web:5f2309c6da22c0f195bc94",
   measurementId: "G-2ZGZ25R5FK"
-});
+};
 
-export const database = window.firebase.firestore();
-export default app;
-export async function guardarRegistro(task) {
-  try {
-    const respuesta = await window.firebase.firestore().collection("products").add(task);
-    return respuesta;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
-
-export async function obtenerRegistro(collection) {
-  try {
-    const response = await window.firebase.firestore().collection(collection).get();
-    return response
-  } catch (error) {
-    throw new Error(error);
-  }
+export const getId = () => {
+  return uuidv4();
 }
 
 
-const auth = window.firebase.auth();
-const provider = new window.firebase.auth.GoogleAuthProvider();
+initializeApp(firebaseConfig);
 
-export async function login() {
+// Se exporta varibable para conexión a base de datos.
+// const auth = getAuth();
+const database = getFirestore();
+
+export const saveData = async (nameCollection, data) => {
   try {
-    const response = await auth.signInWithPopup(provider)
-    return response
-  } catch (error) {
-    console.log(error)
-    throw new Error(error)
-  }
+    const response = await addDoc(collection(database, nameCollection), data)
 
+    return response;
+  } catch (e) {
+    throw new Error(e);
+  }
 }
+
+export const getData = async (nameCollection) => {
+  try {
+    const response = await getDocs(query(collection(database, nameCollection)))
+        const dataColletion = response.docs.map((item) => {
+          const itemtemp = {
+            id: item.id,
+            ...item.data()
+          }
+          return itemtemp;
+        })
+    return dataColletion;
+  } catch (e) {
+    throw new Error(e);
+  }
+}
+
+
+
+
+

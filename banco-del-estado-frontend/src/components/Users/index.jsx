@@ -10,7 +10,7 @@ export default function Users() {
       <div className="content">
         <Header></Header>
         <div className="container">
-          <Banner text={"Listado de usuarios"}></Banner>
+          <Banner text={"usuarios"}></Banner>
         </div>
       </div>
     </Fragment>
