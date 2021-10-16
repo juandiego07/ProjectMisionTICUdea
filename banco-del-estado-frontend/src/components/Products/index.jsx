@@ -5,7 +5,7 @@ import Header from "../Layout/Header";
 import Banner from "../Layout/Banner";
 import List from "./List";
 
-export default function Products(propos) {
+export default function Products(props) {
   
   const [isForm, setIsForm] = useState(false);
 

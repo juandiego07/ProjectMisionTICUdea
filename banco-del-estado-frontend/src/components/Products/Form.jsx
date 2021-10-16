@@ -3,7 +3,7 @@ import { saveData, getId } from "../../Firebase";
 // import {v4 as uuidv4} from "uuid";
 
 export default function Form({ handlerCancel }) {
-  async function handleSave() {
+  async function handleSave(props) {
     const data = {
       id: getId(),
       idRef: document.getElementById("id").value,

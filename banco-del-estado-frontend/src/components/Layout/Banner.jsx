@@ -5,7 +5,7 @@ export default function Banner({
   isButton = false,
   home = false,
   handlerForm,
-}) {
+}, props) {
   return (
     <Fragment>
       <div className="card mb-3">
