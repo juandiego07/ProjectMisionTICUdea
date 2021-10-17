@@ -1,11 +1,16 @@
 import { Fragment } from "react";
+import { Link, useParams } from "react-router-dom";
 
 export default function Banner({
   text = "",
-  isButton = false,
   home = false,
   handlerForm,
+  url
 }, props) {
+
+
+  const action = useParams();
+
   return (
     <Fragment>
       <div className="card mb-3">
@@ -17,13 +22,14 @@ export default function Banner({
               ) : (
                 <p className="text-primary module-title">Listado de {text}</p>
               )}
-              {isButton && (
-                <button
+              {action.id !== "create" && (
+                <Link
+                  to={`/${url}/create`}
                   onClick={handlerForm}
                   className="btn btn-primary registrar me-4"
                 >
                   Registrar {text}
-                </button>
+                </Link>
               )}
             </div>
           </div>

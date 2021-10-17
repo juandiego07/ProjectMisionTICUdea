@@ -12,7 +12,7 @@ export default function Sales() {
       <div className="content">
         <Header></Header>
         <div className="container">
-          <Banner text={"ventas"} isButton={true}></Banner>
+          <Banner text={"ventas"}></Banner>
         </div>
       </div>
     </Fragment>
