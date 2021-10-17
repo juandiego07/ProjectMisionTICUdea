@@ -1,7 +1,100 @@
-import React, { Fragment } from "react";
-import "../Style.css";
-
+import React, { Fragment, useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { saveData, getData, updateItem, getItem } from "../../Firebase";
+// updateItem
 export default function FormSales() {
+  const [productList, setProductList] = useState([]);
+  // const [indexP, setIndexP] = useState(0);
+  const [idRef, setIdRef] = useState("");
+  const [date, setDate] = useState("");
+  const [name, setName] = useState("");
+  const [idDoc, setIdDoc] = useState("");
+  const [product, setProduct] = useState("");
+  const [price, setPrice] = useState("");
+  const [idSeller, setIdSeller] = useState("");
+  const [total, setTotal] = useState("");
+  const [description, setDescription] = useState("");
+
+  // const [price, setPrice] = useState("");
+
+  const comeBack = useHistory();
+  const action = useParams();
+
+  useEffect(() => {
+    const dataLoad = async () => {
+      const tempList = await getData("products");
+      setProductList(tempList);
+    };
+    dataLoad();
+  });
+
+  useEffect(() => {
+    const dataLoad = async () => {
+      if (action.id !== "create") {
+        getUpdate(action.id);
+        setIdRef("");
+        setDate("");
+        setName("");
+        setIdDoc("");
+        setProduct("");
+        setPrice("");
+        setIdSeller("");
+        setTotal("");
+        setDescription("");
+      }
+    };
+    dataLoad();
+  }, [action.id]);
+
+  const getUpdate = async (id) => {
+    try {
+      const data = await getItem("sales", id);
+      setIdRef(data.idRef);
+      setDate(data.date);
+      setName(data.name);
+      setIdDoc(data.idDoc);
+      setProduct(data.product);
+      setPrice(data.price);
+      setIdSeller(data.idSeller);
+      setTotal(data.total);
+      setDescription(data.description);
+    } catch (e) {
+      throw new Error(e);
+    }
+  };
+
+  const handleSave = async () => {
+    const data = {
+      idRef: idRef,
+      date: date,
+      name: name,
+      idDoc: idDoc,
+      product: product,
+      price: price,
+      idSeller: idSeller,
+      total: total,
+      description: description,
+    };
+    await saveData("sales", data);
+    comeBack.push("/sales");
+  };
+
+  const handleUpdate = async () => {
+    const data = {
+      idRef: idRef,
+      date: date,
+      name: name,
+      idDoc: idDoc,
+      product: product,
+      price: price,
+      idSeller: idSeller,
+      total: total,
+      description: description,
+    };
+    await updateItem("sales", action.id, data);
+    comeBack.push("/sales");
+  };
+
   return (
     <Fragment>
       <div className="container">
@@ -16,48 +109,56 @@ export default function FormSales() {
                   Identificador <span>*</span>
                 </label>
                 <input
+                  value={idRef}
+                  onChange={(e) => setIdRef(e.target.value)}
                   type="text"
                   className="form-control"
-                  id="identificador"
+                  id="id"
+                  autoComplete="off"
                   required
                 />
-                <div className="invalid-feedback">Campo obligatorio</div>
               </div>
               <div className="col-12 col-md-6 mb-3">
                 <label className="form-label">
                   Fecha de la venta <span>*</span>
                 </label>
                 <input
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                   type="date"
                   className="form-control"
-                  id="fecha"
+                  id="date"
+                  autoComplete="off"
                   required
                 />
-                <div className="invalid-feedback">Campo obligatorio</div>
               </div>
               <div className="col-12 col-md-6 mb-3">
-                <label fclassName="form-label">
+                <label className="form-label">
                   Nombre del cliente <span>*</span>
                 </label>
                 <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   type="text"
                   className="form-control"
-                  id="nombre"
+                  id="name"
+                  autoComplete="off"
                   required
                 />
-                <div className="invalid-feedback">Campo obligatorio</div>
               </div>
               <div className="col-12 col-md-6 mb-3">
                 <label className="form-label">
                   Documento de identidad <span>*</span>
                 </label>
                 <input
+                  value={idDoc}
+                  onChange={(e) => setIdDoc(e.target.value)}
                   type="number"
                   className="form-control"
-                  id="documento"
+                  id="idDoc"
+                  autoComplete="off"
                   required
                 />
-                <div className="invalid-feedback">Campo obligatorio</div>
               </div>
               <div className="col-12 col-md-6 mb-3">
                 <label className="form-label">
@@ -65,26 +166,23 @@ export default function FormSales() {
                 </label>
                 <div className="d-flex">
                   <select
+                    value={product}
+                    onChange={(e) => setProduct(e.target.value)}
                     className="form-select"
                     aria-label="Default select example"
                     id="producto"
+                    autoComplete="off"
                     required
                   >
-                    {/* <option selected></option>
-                    <option value="1">Cuenta ahorro</option>
-                    <option value="2">Cuenta corriente</option>
-                    <option value="3">Crédito de vivienda</option>
-                    <option value="4">Crédito de libre inversión</option>
-                    <option value="5">Crédito de vehiculo</option>
-                    <option value="6">Crédito de libranza</option>
-                    <option value="7">Crédito de estudio</option>
-                    <option value="8">Tarjeta de debito</option>
-                    <option value="9">Tarjeta de credito</option>
-                    <option value="10">Seguro de vida</option> */}
+                    <option selected></option>
+                    {productList.map((data, index) => {
+                      return (
+                        <option key={index} value={data.name}>
+                          {data.name}
+                        </option>
+                      );
+                    })}
                   </select>
-                </div>
-                <div className="invalid-feedback">
-                  Campo obligatorio <span>*</span>
                 </div>
               </div>
               <div className="col-12 col-md-6 mb-3">
@@ -92,48 +190,69 @@ export default function FormSales() {
                   Precio unitario <span>*</span>
                 </label>
                 <input
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                   type="number"
                   className="form-control"
                   id="preciounitario"
+                  autoComplete="off"
                   required
+                  // disabled
                 />
-                <div className="invalid-feedback">Campo obligatorio</div>
               </div>
               <div className="col-12 col-md-6 mb-3">
                 <label className="form-label">
                   Identificador del vendedor <span>*</span>
                 </label>
                 <input
-                  type="number"
+                  value={idSeller}
+                  onChange={(e) => setIdSeller(e.target.value)}
+                  type="text"
                   className="form-control"
                   id="idVendedor"
+                  autoComplete="off"
                   required
                 />
-                <div className="invalid-feedback">Campo obligatorio</div>
               </div>
               <div className="col-12 col-md-6 mb-3">
                 <label className="form-label">
                   Valor total venta <span>*</span>
                 </label>
                 <input
+                  value={total}
+                  onChange={(e) => setTotal(e.target.value)}
                   type="number"
                   className="form-control"
                   id="totalVenta"
+                  autoComplete="off"
                   required
                 />
-                <div className="invalid-feedback">Campo obligatorio</div>
               </div>
               <div className="col-12 col-md-6 mb-3">
                 <label className="form-label">Descripción</label>
                 <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   className="form-control"
                   id="descripcion"
                   rows="3"
                 ></textarea>
               </div>
               <div className="container-fluid text-center">
-                <button type="submit" className="btn btn-primary">
-                  Guardar
+                <button
+                  onClick={action.id === "create" ? handleSave : handleUpdate}
+                  type="button"
+                  className="btn btn-primary mx-2"
+                >
+                  {action.id === "create" ? "Guardar" : "Actualizar"}
+                </button>
+                <button
+                  id="cancel"
+                  type="reset"
+                  className="btn btn-primary mx-2"
+                  onClick={() => comeBack.push("/sales")}
+                >
+                  Regresar
                 </button>
               </div>
             </form>

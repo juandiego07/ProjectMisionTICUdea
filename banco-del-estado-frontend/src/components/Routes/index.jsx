@@ -13,14 +13,17 @@ export default function Routes() {
         <Route path="/products/:id" exact>
           <Products></Products>
         </Route>
+        <Route path="/sales/:id" exact>
+          <Sales></Sales>
+        </Route>
         <Route path="/products" exact>
           <Products></Products>
         </Route>
-        <Route path="/users" exact>
-          <Users></Users>
-        </Route>
         <Route path="/sales" exact>
           <Sales></Sales>
+        </Route>
+        <Route path="/users" exact>
+          <Users></Users>
         </Route>
         <Route path="/home" exact>
           <Home></Home>
