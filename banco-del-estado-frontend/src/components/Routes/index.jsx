@@ -10,16 +10,19 @@ export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path="/Products" exact>
+        <Route path="/products/:id" exact>
           <Products></Products>
         </Route>
-        <Route path="/Users" exact>
+        <Route path="/products" exact>
+          <Products></Products>
+        </Route>
+        <Route path="/users" exact>
           <Users></Users>
         </Route>
-        <Route path="/Sales" exact>
+        <Route path="/sales" exact>
           <Sales></Sales>
         </Route>
-        <Route path="/Home" exact>
+        <Route path="/home" exact>
           <Home></Home>
         </Route>
         <Route path="/" exact>

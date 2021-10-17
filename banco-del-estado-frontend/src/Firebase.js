@@ -12,8 +12,9 @@ import {
   query,
   getDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore";
-//  updateDoc, deleteDoc } from 'firebase/firestore'
+// setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -52,11 +53,11 @@ export const getData = async (nameCollection) => {
   try {
     const response = await getDocs(query(collection(database, nameCollection)));
     const dataColletion = response.docs.map((item) => {
-      const itemtemp = {
+      const itemTemp = {
         id: item.id,
         ...item.data(),
       };
-      return itemtemp;
+      return itemTemp;
     });
     return dataColletion;
   } catch (e) {
@@ -66,7 +67,7 @@ export const getData = async (nameCollection) => {
 
 export const getItem = async (nameCollection, idDoc) => {
   try {
-    const item = await getDoc(doc(collection(database, nameCollection),idDoc));
+    const item = await getDoc(doc(database, nameCollection, idDoc));
     const response = {
       id: item.id,
       ...item.data(),
@@ -76,3 +77,57 @@ export const getItem = async (nameCollection, idDoc) => {
     throw new Error(e);
   }
 };
+
+// export const getItem = async (nameCollection, idDoc) => {
+//   try {
+//     const item = await getDocs(
+//       query(collection(database, nameCollection), where("uuid", "==", idDoc))
+//     );
+
+//     const response = item.docs.map((doc) => {
+//       const data = {
+//         uuid: doc.uuid,
+//         ...doc.data(),
+//       };
+//       return data;
+//     });
+//     return response;
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };
+
+// export const consultarDocumentoDatabase = async (nombreDatabase, id) => {
+//   try {
+//     const response = await getDoc(doc(database, nombreDatabase, id));
+//     const document = {
+//       id: response.id,
+//       ...response.data(),
+//     };
+//     return document;
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// };
+
+// Actualizar un documento
+export const updateItem = async (nameCollection, idDoc, data) => {
+  try {
+    const item = doc(database, nameCollection, idDoc);
+    const response = await updateDoc(item, data);
+    return response;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+// export const updateItem = async (nameCollection, idDoc, data) => {
+//   try {
+//     const response = await updateDoc(
+//       doc(database, nameCollection, idDoc),
+//       data
+//     );
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };

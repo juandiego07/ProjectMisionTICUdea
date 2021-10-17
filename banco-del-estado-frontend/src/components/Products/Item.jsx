@@ -39,7 +39,7 @@ export default function Item(props) {
                   className="gx-btn gx-btn-lg gx-flat-btn text-muted p-1 m-0"
                   data-toggle="tooltip"
                   title="Editar"
-                  to=""
+                  to={`/products/${props.value.id}`}
                 >
                   <span className="material-icons">edit</span>
                 </Link>
