@@ -52,7 +52,6 @@ export default function Form(props) {
 
   async function handleUpdate() {
         const data = {
-          uuid: action.id,
           idRef: idRef,
           name: name,
           price: price,

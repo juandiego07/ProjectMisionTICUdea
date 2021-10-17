@@ -1,15 +1,8 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
-export default function Item({ 
-    id,
-    date,
-    name,
-    personalId,
-    product,
-    price,
-    sellerId,
-    amount
- }) {
+
+export default function Item(props) {
 
   return (
     <Fragment>
@@ -22,36 +15,36 @@ export default function Item({
                   <p className="text-muted text-capitalize mb-0">
                     Identificador
                   </p>
-                  <div>{id}</div>
+                  <div>{props.value.idRef}</div>
                 </div>
                 <div className="col-12 col-md-3 col-sm-6">
                   <p className="text-muted text-capitalize mb-0">
                     Documento identidad
                   </p>
-                  <div>{personalId}</div>
+                  <div>{props.value.idDoc}</div>
                 </div>
                 <div className="col-12 col-md-3 col-sm-6">
                   <p className="text-muted text-capitalize mb-0">
                     Nombre cliente
                   </p>
-                  <div>{name}</div>
+                  <div>{props.value.name}</div>
                 </div>
                 <div className="col-12 col-md-3 col-sm-6">
                   <p className="text-muted text-capitalize mb-0">Valor venta</p>
-                  <div>{amount}</div>
+                  <div>{props.value.total}</div>
                 </div>
               </div>
             </div>
             <div className="col-12 col-md-1">
               <div>
-                <a
+                <Link
                   className="gx-btn gx-btn-lg gx-flat-btn text-muted p-1 m-0"
                   data-toggle="tooltip"
                   title="Editar"
-                  href="/ventas"
+                  to={`/sales/${props.value.id}`}
                 >
                   <span className="material-icons">edit</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
