@@ -2,6 +2,14 @@ import { initializeApp } from "firebase/app";
 
 import { getFirestore } from "firebase/firestore";
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+
 // import { getAuth, } from "firebase/auth";
 //  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 
@@ -16,8 +24,6 @@ import {
 } from "firebase/firestore";
 // setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 
-import { v4 as uuidv4 } from "uuid";
-
 // Inicialización de llaves para conexión a Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyB5E__etU6IXlhswKakyRM88eXABPQRbUE",
@@ -29,15 +35,14 @@ const firebaseConfig = {
   measurementId: "G-2ZGZ25R5FK",
 };
 
-export const getId = () => {
-  return uuidv4();
-};
 
-initializeApp(firebaseConfig);
 
-// Se exporta varibable para conexión a base de datos.
-// const auth = getAuth();
+
+
+export const app = initializeApp(firebaseConfig);
 const database = getFirestore();
+const auth = getAuth();
+export let usuario;
 
 export const saveData = async (nameCollection, data) => {
   try {
@@ -78,39 +83,6 @@ export const getItem = async (nameCollection, idDoc) => {
   }
 };
 
-// export const getItem = async (nameCollection, idDoc) => {
-//   try {
-//     const item = await getDocs(
-//       query(collection(database, nameCollection), where("uuid", "==", idDoc))
-//     );
-
-//     const response = item.docs.map((doc) => {
-//       const data = {
-//         uuid: doc.uuid,
-//         ...doc.data(),
-//       };
-//       return data;
-//     });
-//     return response;
-//   } catch (e) {
-//     throw new Error(e);
-//   }
-// };
-
-// export const consultarDocumentoDatabase = async (nombreDatabase, id) => {
-//   try {
-//     const response = await getDoc(doc(database, nombreDatabase, id));
-//     const document = {
-//       id: response.id,
-//       ...response.data(),
-//     };
-//     return document;
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// };
-
-// Actualizar un documento
 export const updateItem = async (nameCollection, idDoc, data) => {
   try {
     const item = doc(database, nameCollection, idDoc);
@@ -121,13 +93,72 @@ export const updateItem = async (nameCollection, idDoc, data) => {
   }
 };
 
-// export const updateItem = async (nameCollection, idDoc, data) => {
-//   try {
-//     const response = await updateDoc(
-//       doc(database, nameCollection, idDoc),
-//       data
-//     );
-//   } catch (e) {
-//     throw new Error(e);
-//   }
-// };
+export const createUser = async (email, password) => {
+  try {
+    const dataUser = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = {
+      email: dataUser.user.email,
+      rol: "Pendiente",
+      state: "Pendiente",
+    };
+    saveData("listUsers", user);
+    return user;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+// Login Usuarios
+export const loginUser = async (email, password) => {
+  try {
+    const dataUser = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return dataUser.user;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+// LogOut -> salir
+export const logOutUser = async () => {
+  try {
+    const response = await signOut(auth);
+    return response;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+//  datos usuario
+export const dataUser = async () => {
+  try {
+    const user = auth.currentUser;
+    console.log(user);
+
+    if (user) {
+      console.log(user);
+      return user;
+    } else {
+      return undefined;
+    }
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    usuario = user;
+    console.log("El usuario logueado");
+  } else {
+    console.log("El usuario ya no esta logueado");
+    usuario = undefined;
+  }
+});
