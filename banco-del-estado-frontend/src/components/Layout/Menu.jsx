@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import "../Style.css";
 
 export default function Menu({ isActive = null }) {
+
+
+
   return (
     <div className="sidebar">
       <Link className="logo" to="/home">
@@ -10,7 +13,9 @@ export default function Menu({ isActive = null }) {
           <span>Banco Estatal</span>
         </div>
       </Link>
-      <Link to="/">
+      <Link 
+        to="/"
+      >
         <div className="d-flex align-items-center">
           <span className="material-icons pe-2">logout</span>
           <span>Cerrar sesión</span>
