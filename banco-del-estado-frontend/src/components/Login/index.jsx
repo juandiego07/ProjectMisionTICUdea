@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { loginGoogle } from "../../Firebase";
+import { Redirect } from "react-router-dom";
 import "./Style.css";
-import {loginGoogle} from "../../Firebase";
 
 export default function Login() {
-  async function handleClick(){
-    loginGoogle()
-  }
-  return (
+  const [isLogIn, setIsLogIn] = useState(false)
+  const handleGoogle = async () => {
+    await loginGoogle();
+    setIsLogIn(true);
+  };
+
+  return isLogIn ? (<Redirect to="/home"></Redirect>) : (
     <div className="body container-fluid ">
       <div className="row">
         <div className="imagenBanco col-12 col-sm-10 col-lg-8 m-auto mt-2">
@@ -14,27 +18,16 @@ export default function Login() {
           <span>Banco del Estado</span>
         </div>
         <div>
-          <form id="formulario" action="/home">
-            <div className="col-12 col-sm-10 col-lg-8 m-auto mt-2">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Usuario"
-              />
-            </div>
-            <div className="col-12 col-sm-10 col-lg-8 m-auto mt-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Contraseña"
-              />
-            </div>
-
+          <form>
             <div className="divBotonLogin col-12 col-sm-10 col-lg-8 m-auto mt-3">
-              <button id="myBtn" className="btn boton" type="button" onClick={handleClick}>Ingresar con Google</button>
-              {/*<Link className="btn boton" to="/home">*/}
-              {/*  Ingresar con google*/}
-              {/*</Link>*/}
+              <button
+                id="btnRegistrar"
+                type="button"
+                className="btn boton mx-2"
+                onClick={handleGoogle}
+              >
+                <i className="bi bi-google"> Inicio de sesión</i>
+              </button>
             </div>
           </form>
         </div>

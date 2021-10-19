@@ -6,7 +6,7 @@ export default function List ()  {
     const [userList ,setUserList] = useState([]);
       useEffect(() => {
         const dataLoad = async () => {
-          const tempList = await getData("listUsers");
+          const tempList = await getData("listaUsuarios");
           setUserList(tempList);
         };
         dataLoad();

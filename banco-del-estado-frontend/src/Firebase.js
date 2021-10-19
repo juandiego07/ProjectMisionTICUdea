@@ -1,34 +1,22 @@
-import {initializeApp} from "firebase/app";
-
-import {getFirestore} from "firebase/firestore";
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
-// import { getAuth, } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import {
-    getAuth,
-    signInWithPopup,
-    GoogleAuthProvider,
-    onAuthStateChanged,
-    signOut,
-    signInWithCredential
-} from 'firebase/auth';
-//  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
-
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import {
-    addDoc,
-    collection,
-    getDocs,
-    query,
-    getDoc,
-    doc,
-    updateDoc,
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  getDoc,
+  doc,
+  updateDoc,
+  
 } from "firebase/firestore";
-// setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 
-import {v4 as uuidv4} from "uuid";
-import {Redirect} from "react-router-dom";
-import Home from "./components/Layout/Home";
-
-// Inicialización de llaves para conexión a Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyB5E__etU6IXlhswKakyRM88eXABPQRbUE",
   authDomain: "list-task-78971.firebaseapp.com",
@@ -39,52 +27,23 @@ const firebaseConfig = {
   measurementId: "G-2ZGZ25R5FK",
 };
 
-// firebase Karen
-// const firebaseConfig = {
-//     apiKey: "AIzaSyBMUZ9WCJA207llq7SwJyAJ27prRMhhJbo",
-//     authDomain: "mintic-c05a3.firebaseapp.com",
-//     projectId: "mintic-c05a3",
-//     storageBucket: "mintic-c05a3.appspot.com",
-//     messagingSenderId: "520228009417",
-//     appId: "1:520228009417:web:2135894e373564d1dce418",
-//     measurementId: "G-TBVBP3ZEHH"
-// };
-
-export const getId = () => {
-    return uuidv4();
-};
-
-initializeApp(firebaseConfig);
-
-// Se exporta varibable para conexión a base de datos.
+export const app = initializeApp(firebaseConfig);
+const provider = new GoogleAuthProvider();
 const database = getFirestore();
 const auth = getAuth();
-
-const provider = new GoogleAuthProvider();
-
-
-// Listen for authentication state to change.
-onAuthStateChanged(auth, (user) => {
-    if (user != null) {
-        console.log('We are authenticated now!');
-        return <Redirect to="/home" />
-    }
-})
 
 // LogIn -> ingresar
 export async function loginGoogle() {
     try {
         const respuesta = await signInWithPopup(auth, provider);
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // The signed-in user info.
         const user = {
-            id: respuesta.user.uid,
-            email: respuesta.user.email,
-            displayName: respuesta.user.displayName,
-        }
+          id: respuesta.user.uid,
+          email: respuesta.user.email,
+          displayName: respuesta.user.displayName,
+          state: "Pendiente",
+          rol: "Pendiente",
+        };
         saveData('listaUsuarios', user)
-
         console.log("login", respuesta.user);
     } catch (e) {
         throw new Error(e)
@@ -103,94 +62,120 @@ export const logOutUser = async () => {
 }
 
 export const saveData = async (nameCollection, data) => {
-    try {
-        const response = await addDoc(collection(database, nameCollection), data);
+  try {
+    const response = await addDoc(collection(database, nameCollection), data);
 
-        return response;
-    } catch (e) {
-        throw new Error(e);
-    }
+    return response;
+  } catch (e) {
+    throw new Error(e);
+  }
 };
 
 export const getData = async (nameCollection) => {
-    try {
-        const response = await getDocs(query(collection(database, nameCollection)));
-        const dataColletion = response.docs.map((item) => {
-            const itemTemp = {
-                id: item.id,
-                ...item.data(),
-            };
-            return itemTemp;
-        });
-        return dataColletion;
-    } catch (e) {
-        throw new Error(e);
-    }
+  try {
+    const response = await getDocs(query(collection(database, nameCollection)));
+    const dataColletion = response.docs.map((item) => {
+      const itemTemp = {
+        id: item.id,
+        ...item.data(),
+      };
+      return itemTemp;
+    });
+    return dataColletion;
+  } catch (e) {
+    throw new Error(e);
+  }
 };
 
 export const getItem = async (nameCollection, idDoc) => {
-    try {
-        const item = await getDoc(doc(database, nameCollection, idDoc));
-        const response = {
-            id: item.id,
-            ...item.data(),
-        };
-        return response;
-    } catch (e) {
-        throw new Error(e);
-    }
+  try {
+    const item = await getDoc(doc(database, nameCollection, idDoc));
+    const response = {
+      id: item.id,
+      ...item.data(),
+    };
+    return response;
+  } catch (e) {
+    throw new Error(e);
+  }
 };
 
-// export const getItem = async (nameCollection, idDoc) => {
-//   try {
-//     const item = await getDocs(
-//       query(collection(database, nameCollection), where("uuid", "==", idDoc))
-//     );
+export const updateItem = async (nameCollection, idDoc, data) => {
+  try {
+    const item = doc(database, nameCollection, idDoc);
+    const response = await updateDoc(item, data);
+    return response;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
 
-//     const response = item.docs.map((doc) => {
-//       const data = {
-//         uuid: doc.uuid,
-//         ...doc.data(),
-//       };
-//       return data;
-//     });
+// export const createUser = async (email, password) => {
+//   try {
+//     const dataUser = await createUserWithEmailAndPassword(
+//       auth,
+//       email,
+//       password
+//     );
+//     const user = {
+//       email: dataUser.user.email,
+//       rol: "Pendiente",
+//       state: "Pendiente",
+//     };
+//     saveData("listUsers", user);
+//     return user;
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };
+
+// Login Usuarios
+// export const loginUser = async (email, password) => {
+//   try {
+//     const dataUser = await signInWithEmailAndPassword(
+//       auth,
+//       email,
+//       password
+//     );
+//     return dataUser.user;
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };
+
+// LogOut -> salir
+// export const logOutUser = async () => {
+//   try {
+//     const response = await signOut(auth);
 //     return response;
 //   } catch (e) {
 //     throw new Error(e);
 //   }
 // };
 
-// export const consultarDocumentoDatabase = async (nombreDatabase, id) => {
+//  datos usuario
+// export const dataUser = async () => {
 //   try {
-//     const response = await getDoc(doc(database, nombreDatabase, id));
-//     const document = {
-//       id: response.id,
-//       ...response.data(),
-//     };
-//     return document;
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// };
+//     const user = auth.currentUser;
+//     console.log(user);
 
-// Actualizar un documento
-export const updateItem = async (nameCollection, idDoc, data) => {
-    try {
-        const item = doc(database, nameCollection, idDoc);
-        const response = await updateDoc(item, data);
-        return response;
-    } catch (e) {
-        throw new Error(e);
-    }
-};
-
-// export const updateItem = async (nameCollection, idDoc, data) => {
-//   try {
-//     const response = await updateDoc(
-//       doc(database, nameCollection, idDoc),
-//       data
-//     );
+//     if (user) {
+//       console.log(user);
+//       return user;
+//     } else {
+//       return undefined;
+//     }
 //   } catch (e) {
 //     throw new Error(e);
 //   }
 // };
+
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     usuario = user;
+//     console.log("El usuario logueado");
+//   } else {
+//     console.log("El usuario ya no esta logueado");
+//     usuario = undefined;
+//   }
+// });
