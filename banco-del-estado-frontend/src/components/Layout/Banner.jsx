@@ -22,15 +22,29 @@ export default function Banner({
               ) : (
                 <p className="text-primary module-title">Listado de {text}</p>
               )}
-              {action.id !== "create" && (
+              {
+              
+              action.id === "create" ? (
                 <Link
-                  to={`/${url}/create`}
-                  onClick={handlerForm}
-                  className="btn btn-primary registrar me-4"
+                to={`/${url}/create`}
+                onClick={handlerForm}
+                className="btn btn-primary registrar me-4"
                 >
                   Registrar {text}
                 </Link>
-              )}
+                ) : (
+                  (text === "Ventas" || text === "Productos") && (
+                    <Link
+                      to={`/${url}/create`}
+                      onClick={handlerForm}
+                      className="btn btn-primary registrar me-4"
+                    >
+                      Registrar {text}
+                    </Link>
+                  )
+                )
+                
+                }
             </div>
           </div>
         </div>

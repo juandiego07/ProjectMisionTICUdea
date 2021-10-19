@@ -26,7 +26,7 @@ export default function FormSales() {
       setProductList(tempList);
     };
     dataLoad();
-  });
+  },[]);
 
   useEffect(() => {
     const dataLoad = async () => {
@@ -174,7 +174,7 @@ export default function FormSales() {
                     autoComplete="off"
                     required
                   >
-                    <option selected></option>
+                    <option defaultValue></option>
                     {productList.map((data, index) => {
                       return (
                         <option key={index} value={data.name}>
