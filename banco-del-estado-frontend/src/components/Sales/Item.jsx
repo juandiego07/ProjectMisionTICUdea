@@ -15,7 +15,7 @@ export default function Item(props) {
                   <p className="text-muted text-capitalize mb-0">
                     Identificador
                   </p>
-                  <div>{props.value.idRef}</div>
+                  <div>{props.value.id}</div>
                 </div>
                 <div className="col-12 col-md-3 col-sm-6">
                   <p className="text-muted text-capitalize mb-0">
