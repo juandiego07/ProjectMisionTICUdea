@@ -2,15 +2,15 @@ import { initializeApp } from "firebase/app";
 
 import { getFirestore } from "firebase/firestore";
 
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+// import {
+//   getAuth,
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword,
+//   signOut,
+//   onAuthStateChanged,
+// } from "firebase/auth";
 
-// import { getAuth, } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 //  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 
 import {
@@ -35,14 +35,43 @@ const firebaseConfig = {
   measurementId: "G-2ZGZ25R5FK",
 };
 
-
-
-
-
 export const app = initializeApp(firebaseConfig);
+const provider = new GoogleAuthProvider();
 const database = getFirestore();
 const auth = getAuth();
-export let usuario;
+// export let usuario;
+
+export const login = async () => {
+  // try {
+    const response = await signInWithPopup(auth, provider);
+    // console.log(`Response: ${response}`);
+    console.log(`Response: ${response.user.displayName}`);
+    console.log(`Response: ${response.user.photoURL}`);
+    return response;
+  // } catch (e) {
+  //   const errorCode = e.code;
+  //   const errorMessage = e.message;
+  //   const email = e.email;
+  //   const credential = GoogleAuthProvider.credentialFromError(e);
+  //   console.log(
+  //     `Code: ${errorCode} Message: ${errorMessage} Email: ${email} Credential: ${credential}`
+  //   );
+  //   throw new Error(e);
+  // }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const saveData = async (nameCollection, data) => {
   try {
@@ -93,72 +122,72 @@ export const updateItem = async (nameCollection, idDoc, data) => {
   }
 };
 
-export const createUser = async (email, password) => {
-  try {
-    const dataUser = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const user = {
-      email: dataUser.user.email,
-      rol: "Pendiente",
-      state: "Pendiente",
-    };
-    saveData("listUsers", user);
-    return user;
-  } catch (e) {
-    throw new Error(e);
-  }
-};
+// export const createUser = async (email, password) => {
+//   try {
+//     const dataUser = await createUserWithEmailAndPassword(
+//       auth,
+//       email,
+//       password
+//     );
+//     const user = {
+//       email: dataUser.user.email,
+//       rol: "Pendiente",
+//       state: "Pendiente",
+//     };
+//     saveData("listUsers", user);
+//     return user;
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };
 
 // Login Usuarios
-export const loginUser = async (email, password) => {
-  try {
-    const dataUser = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    return dataUser.user;
-  } catch (e) {
-    throw new Error(e);
-  }
-};
+// export const loginUser = async (email, password) => {
+//   try {
+//     const dataUser = await signInWithEmailAndPassword(
+//       auth,
+//       email,
+//       password
+//     );
+//     return dataUser.user;
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };
 
 // LogOut -> salir
-export const logOutUser = async () => {
-  try {
-    const response = await signOut(auth);
-    return response;
-  } catch (e) {
-    throw new Error(e);
-  }
-};
+// export const logOutUser = async () => {
+//   try {
+//     const response = await signOut(auth);
+//     return response;
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };
 
 //  datos usuario
-export const dataUser = async () => {
-  try {
-    const user = auth.currentUser;
-    console.log(user);
+// export const dataUser = async () => {
+//   try {
+//     const user = auth.currentUser;
+//     console.log(user);
 
-    if (user) {
-      console.log(user);
-      return user;
-    } else {
-      return undefined;
-    }
-  } catch (e) {
-    throw new Error(e);
-  }
-};
+//     if (user) {
+//       console.log(user);
+//       return user;
+//     } else {
+//       return undefined;
+//     }
+//   } catch (e) {
+//     throw new Error(e);
+//   }
+// };
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    usuario = user;
-    console.log("El usuario logueado");
-  } else {
-    console.log("El usuario ya no esta logueado");
-    usuario = undefined;
-  }
-});
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     usuario = user;
+//     console.log("El usuario logueado");
+//   } else {
+//     console.log("El usuario ya no esta logueado");
+//     usuario = undefined;
+//   }
+// });

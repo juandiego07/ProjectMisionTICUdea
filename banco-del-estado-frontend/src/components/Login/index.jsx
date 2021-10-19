@@ -1,43 +1,66 @@
 import { useState } from "react";
-import {  Redirect } from "react-router-dom";
-import { createUser, loginUser } from "../../Firebase";
+// import PrivateRoute  from "../Routes/PrivateRoute";
+// import Home from "../Layout/Home";
+// import { login } from "../../Google";
+// import {  Redirect } from "react-router-dom";
+import { login } from "../../Firebase";
 import "./Style.css";
+import { Redirect } from "react-router-dom";
 export default function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [confirmation, setConfirmation] = useState("");
 
-  const handleRegister = async (e) => {
-    if (user === "" || password === "" || confirmation === "") {
-      alert("Todo los campos son requeridos");
-    } else {
-      if (password !== confirmation) {
-        alert("Contraseñas no coinciden");
-        setPassword("");
-        setConfirmation("");
-      } else if (password.length > 5) {
-        const response = await createUser(user, password);
-        console.log(response);
-        alert("Usuario registrado");
-        <Redirect to="/home" />;
-        return response;
-      } else {
-        alert("Contraseñas debe contener minimo 6 caracteres");
-      }
+  // const handleRegister = async (e) => {
+  //   if (user === "" || password === "" || confirmation === "") {
+  //     alert("Todo los campos son requeridos");
+  //   } else {
+  //     if (password !== confirmation) {
+  //       alert("Contraseñas no coinciden");
+  //       setPassword("");
+  //       setConfirmation("");
+  //     } else if (password.length > 5) {
+  //       const response = await createUser(user, password);
+  //       console.log(response);
+  //       alert("Usuario registrado");
+  //       <Redirect to="/home" />;
+  //       return response;
+  //     } else {
+  //       alert("Contraseñas debe contener minimo 6 caracteres");
+  //     }
+  //   }
+  // };
+
+  // const handleLogin = async () => {
+
+  //     const loggedIn = await loginUser(user, password);
+
+  //     if (loggedIn !== null) {
+  //       <Redirect to="/home" />;
+  //     } else {
+  //       console.log("no entro");
+  //     }
+  //     return loggedIn;
+
+  // };
+
+
+
+  const handleGoogle = async () => {
+    try {
+      const response = await login();
+      console.log(`Login ${response.user.emailVerified}`);
+      return <Redirect push to="/home"/>;
+    } catch (e) {
+      const errorCode = e.code;
+      const errorMessage = e.message;
+      const email = e.email;
+      // const credential = GoogleAuthProvider.credentialFromError(e);
+      console.log(
+        `Code: ${errorCode} Message: ${errorMessage} Email: ${email}}`
+      );
+      throw new Error(e);
     }
-  };
-
-  const handleLogin = async () => {
-
-      const loggedIn = await loginUser(user, password);
-
-      if (loggedIn !== null) {
-        <Redirect to="/home" />;
-      } else {
-        console.log("no entro");
-      }
-      return loggedIn;
-
   };
 
   return (
@@ -48,8 +71,8 @@ export default function Login() {
           <span>Banco del Estado</span>
         </div>
         <div>
-          <form id="formulario" action="/home">
-            <div className="col-12 col-sm-10 col-lg-8 m-auto mt-2">
+          <form>
+            {/* <div className="col-12 col-sm-10 col-lg-8 m-auto mt-2">
               <input
                 value={user}
                 onChange={(e) => setUser(e.target.value)}
@@ -66,24 +89,26 @@ export default function Login() {
                 className="form-control"
                 placeholder="Ingrese contraseña"
               />
-            </div>
+            </div> */}
             <div className="divBotonLogin col-12 col-sm-10 col-lg-8 m-auto mt-3">
-              <button
+              {/* <button
                 onClick={handleLogin}
                 id="btnIngresar"
                 type="button"
                 className="btn boton mx-2"
               >
                 Ingresar
-              </button>
+              </button> */}
+
               <button
                 id="btnRegistrar"
                 type="button"
                 className="btn boton mx-2"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
+                onClick={handleGoogle}
+                // data-bs-toggle="modal"
+                // data-bs-target="#staticBackdrop"
               >
-                Registrarse
+                <i className="bi bi-google"> Inicio de sesión</i>
               </button>
               <div
                 className="modal fade"
@@ -141,14 +166,14 @@ export default function Login() {
                       >
                         Cerrar
                       </button>
-                      <button
+                      {/* <button
                         id="guardar"
                         onClick={handleRegister}
                         type="button"
                         className="btn btn-primary"
                       >
                         Registrar
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
