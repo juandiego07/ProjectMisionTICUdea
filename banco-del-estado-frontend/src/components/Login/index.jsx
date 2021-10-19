@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import "./Style.css";
+import {loginGoogle} from "../../Firebase";
+
 export default function Login() {
+  async function handleClick(){
+    loginGoogle()
+  }
   return (
     <div className="body container-fluid ">
       <div className="row">
@@ -26,12 +31,10 @@ export default function Login() {
             </div>
 
             <div className="divBotonLogin col-12 col-sm-10 col-lg-8 m-auto mt-3">
-              {/* <button id="btnIngresar" type="submit" className="btn boton ">
-                Ingresar con google
-              </button> */}
-              <Link className="btn boton" to="/home">
-                Ingresar con google
-              </Link>
+              <button id="myBtn" className="btn boton" type="button" onClick={handleClick}>Ingresar con Google</button>
+              {/*<Link className="btn boton" to="/home">*/}
+              {/*  Ingresar con google*/}
+              {/*</Link>*/}
             </div>
           </form>
         </div>

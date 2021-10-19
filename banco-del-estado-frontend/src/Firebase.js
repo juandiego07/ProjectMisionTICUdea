@@ -1,22 +1,32 @@
-import { initializeApp } from "firebase/app";
+import {initializeApp} from "firebase/app";
 
-import { getFirestore } from "firebase/firestore";
-
+import {getFirestore} from "firebase/firestore";
+// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 // import { getAuth, } from "firebase/auth";
+import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signOut,
+    signInWithCredential
+} from 'firebase/auth';
 //  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
 
 import {
-  addDoc,
-  collection,
-  getDocs,
-  query,
-  getDoc,
-  doc,
-  updateDoc,
+    addDoc,
+    collection,
+    getDocs,
+    query,
+    getDoc,
+    doc,
+    updateDoc,
 } from "firebase/firestore";
 // setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 
-import { v4 as uuidv4 } from "uuid";
+import {v4 as uuidv4} from "uuid";
+import {Redirect} from "react-router-dom";
+import Home from "./components/Layout/Home";
 
 // Inicialización de llaves para conexión a Firebase
 const firebaseConfig = {
@@ -29,53 +39,106 @@ const firebaseConfig = {
   measurementId: "G-2ZGZ25R5FK",
 };
 
+// firebase Karen
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBMUZ9WCJA207llq7SwJyAJ27prRMhhJbo",
+//     authDomain: "mintic-c05a3.firebaseapp.com",
+//     projectId: "mintic-c05a3",
+//     storageBucket: "mintic-c05a3.appspot.com",
+//     messagingSenderId: "520228009417",
+//     appId: "1:520228009417:web:2135894e373564d1dce418",
+//     measurementId: "G-TBVBP3ZEHH"
+// };
+
 export const getId = () => {
-  return uuidv4();
+    return uuidv4();
 };
 
 initializeApp(firebaseConfig);
 
 // Se exporta varibable para conexión a base de datos.
-// const auth = getAuth();
 const database = getFirestore();
+const auth = getAuth();
+
+const provider = new GoogleAuthProvider();
+
+
+// Listen for authentication state to change.
+onAuthStateChanged(auth, (user) => {
+    if (user != null) {
+        console.log('We are authenticated now!');
+        return <Redirect to="/home" />
+    }
+})
+
+// LogIn -> ingresar
+export async function loginGoogle() {
+    try {
+        const respuesta = await signInWithPopup(auth, provider);
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+        // The signed-in user info.
+        const user = {
+            id: respuesta.user.uid,
+            email: respuesta.user.email,
+            displayName: respuesta.user.displayName,
+        }
+        saveData('listaUsuarios', user)
+
+        console.log("login", respuesta.user);
+    } catch (e) {
+        throw new Error(e)
+    }
+}
+
+// LogOut -> salir
+export const logOutUser = async () => {
+    try {
+        const respuesta = await signOut(auth)
+        console.log(respuesta);
+        console.log('Me sali...!');
+    } catch (e) {
+        throw new Error(e)
+    }
+}
 
 export const saveData = async (nameCollection, data) => {
-  try {
-    const response = await addDoc(collection(database, nameCollection), data);
+    try {
+        const response = await addDoc(collection(database, nameCollection), data);
 
-    return response;
-  } catch (e) {
-    throw new Error(e);
-  }
+        return response;
+    } catch (e) {
+        throw new Error(e);
+    }
 };
 
 export const getData = async (nameCollection) => {
-  try {
-    const response = await getDocs(query(collection(database, nameCollection)));
-    const dataColletion = response.docs.map((item) => {
-      const itemTemp = {
-        id: item.id,
-        ...item.data(),
-      };
-      return itemTemp;
-    });
-    return dataColletion;
-  } catch (e) {
-    throw new Error(e);
-  }
+    try {
+        const response = await getDocs(query(collection(database, nameCollection)));
+        const dataColletion = response.docs.map((item) => {
+            const itemTemp = {
+                id: item.id,
+                ...item.data(),
+            };
+            return itemTemp;
+        });
+        return dataColletion;
+    } catch (e) {
+        throw new Error(e);
+    }
 };
 
 export const getItem = async (nameCollection, idDoc) => {
-  try {
-    const item = await getDoc(doc(database, nameCollection, idDoc));
-    const response = {
-      id: item.id,
-      ...item.data(),
-    };
-    return response;
-  } catch (e) {
-    throw new Error(e);
-  }
+    try {
+        const item = await getDoc(doc(database, nameCollection, idDoc));
+        const response = {
+            id: item.id,
+            ...item.data(),
+        };
+        return response;
+    } catch (e) {
+        throw new Error(e);
+    }
 };
 
 // export const getItem = async (nameCollection, idDoc) => {
@@ -112,13 +175,13 @@ export const getItem = async (nameCollection, idDoc) => {
 
 // Actualizar un documento
 export const updateItem = async (nameCollection, idDoc, data) => {
-  try {
-    const item = doc(database, nameCollection, idDoc);
-    const response = await updateDoc(item, data);
-    return response;
-  } catch (e) {
-    throw new Error(e);
-  }
+    try {
+        const item = doc(database, nameCollection, idDoc);
+        const response = await updateDoc(item, data);
+        return response;
+    } catch (e) {
+        throw new Error(e);
+    }
 };
 
 // export const updateItem = async (nameCollection, idDoc, data) => {
