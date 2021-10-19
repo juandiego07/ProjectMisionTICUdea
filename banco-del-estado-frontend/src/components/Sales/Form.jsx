@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { saveData, getData, updateItem, getItem } from "../../Firebase";
+import swal from "sweetalert";
 // updateItem
 export default function FormSales() {
   const [productList, setProductList] = useState([]);
@@ -76,6 +77,7 @@ export default function FormSales() {
       description: description,
     };
     await saveData("sales", data);
+    swal("Good job!", "You clicked the button!", "success");
     comeBack.push("/sales");
   };
 

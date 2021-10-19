@@ -1,18 +1,11 @@
 import { initializeApp } from "firebase/app";
-
 import { getFirestore } from "firebase/firestore";
-
-// import {
-//   getAuth,
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   signOut,
-//   onAuthStateChanged,
-// } from "firebase/auth";
-
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-//  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
-
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import {
   addDoc,
   collection,
@@ -21,10 +14,9 @@ import {
   getDoc,
   doc,
   updateDoc,
+  
 } from "firebase/firestore";
-// setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 
-// Inicialización de llaves para conexión a Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyB5E__etU6IXlhswKakyRM88eXABPQRbUE",
   authDomain: "list-task-78971.firebaseapp.com",
@@ -39,39 +31,35 @@ export const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const database = getFirestore();
 const auth = getAuth();
-// export let usuario;
 
-export const login = async () => {
-  // try {
-    const response = await signInWithPopup(auth, provider);
-    // console.log(`Response: ${response}`);
-    console.log(`Response: ${response.user.displayName}`);
-    console.log(`Response: ${response.user.photoURL}`);
-    return response;
-  // } catch (e) {
-  //   const errorCode = e.code;
-  //   const errorMessage = e.message;
-  //   const email = e.email;
-  //   const credential = GoogleAuthProvider.credentialFromError(e);
-  //   console.log(
-  //     `Code: ${errorCode} Message: ${errorMessage} Email: ${email} Credential: ${credential}`
-  //   );
-  //   throw new Error(e);
-  // }
-};
+// LogIn -> ingresar
+export async function loginGoogle() {
+    try {
+        const respuesta = await signInWithPopup(auth, provider);
+        const user = {
+          id: respuesta.user.uid,
+          email: respuesta.user.email,
+          displayName: respuesta.user.displayName,
+          state: "Pendiente",
+          rol: "Pendiente",
+        };
+        saveData('listaUsuarios', user)
+        console.log("login", respuesta.user);
+    } catch (e) {
+        throw new Error(e)
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+// LogOut -> salir
+export const logOutUser = async () => {
+    try {
+        const respuesta = await signOut(auth)
+        console.log(respuesta);
+        console.log('Me sali...!');
+    } catch (e) {
+        throw new Error(e)
+    }
+}
 
 export const saveData = async (nameCollection, data) => {
   try {
