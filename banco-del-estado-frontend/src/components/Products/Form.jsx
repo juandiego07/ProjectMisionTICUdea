@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { saveData, getItem, updateItem } from "../../Firebase";
+import swal from "sweetalert";
 // import {v4 as uuidv4} from "uuid";
 
 export default function Form(props) {
@@ -28,7 +29,7 @@ export default function Form(props) {
   const getUpdate = async (id) => {
     try {
       const data = await getItem("products", id);
-      setIdRef(data.idRef);
+      setIdRef(id);
       setName(data.name);
       setPrice(data.price);
       setState(data.state);
@@ -40,25 +41,29 @@ export default function Form(props) {
 
   async function handleSave() {
     const data = {
-      idRef: idRef,
       name: name,
       price: price,
       state: state,
       description: description,
     };
     await saveData("products", data);
+    swal("Producto registrado!", "Presione OK para continuar...!", "success");
     comeBack.push("/products");
   }
 
   async function handleUpdate() {
         const data = {
-          idRef: idRef,
           name: name,
           price: price,
           state: state,
           description: description,
         };
         await updateItem("products", action.id, data);
+        swal(
+          "Producto actualizado!",
+          "Presione OK para continuar...!",
+          "success"
+        );
         comeBack.push("/products");
   }
 
@@ -83,6 +88,7 @@ export default function Form(props) {
                   id="id"
                   autoComplete="off"
                   required
+                  disabled
                 />
               </div>
               <div className="col-12 col-md-6 mb-3">

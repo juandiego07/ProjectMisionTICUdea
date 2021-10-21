@@ -1,11 +1,13 @@
 import { Fragment, useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 import { getItem, updateItem } from "../../Firebase";
+import swal from "sweetalert";
 
 export default function Form(props) {
   const comeBack = useHistory();
   const action = useParams();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [state, setState] = useState("");
   const [rol, setRol] = useState("");
@@ -24,7 +26,8 @@ export default function Form(props) {
 
   const getUpdate = async (id) => {
     try {
-      const data = await getItem("listUsers", id);
+      const data = await getItem("listaUsuarios", id);
+      setName(data.displayName);
       setEmail(data.email);
       setState(data.state);
       setRol(data.rol);
@@ -39,7 +42,8 @@ export default function Form(props) {
         state: state,
         rol: rol,
       };
-      await updateItem("listUsers", action.id, data);
+      await updateItem("listaUsuarios", action.id, data);
+       swal("Usuario actualizado!", "Presione OK para continuar...!", "success");
       comeBack.push("/users");
     };
 
@@ -59,8 +63,8 @@ export default function Form(props) {
                     type="text"
                     className="form-control"
                     id="fieldName"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     disabled
                     readOnly
                   />
@@ -109,6 +113,7 @@ export default function Form(props) {
                     required
                   >
                     <option defaultValue></option>
+                    <option value="Pendiente">Pendiente</option>
                     <option value="Administrador">Administrador</option>
                     <option value="Vendedor">Vendedor</option>
                   </select>
@@ -127,7 +132,7 @@ export default function Form(props) {
                     id="cancel"
                     type="reset"
                     className="btn btn-primary mx-2"
-                    onClick={() => comeBack.push("/sales")}
+                    onClick={() => comeBack.push("/users")}
                   >
                     Regresar
                   </button>
