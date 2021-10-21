@@ -1,3 +1,4 @@
+import swal from "sweetalert";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -14,7 +15,7 @@ import {
   getDoc,
   doc,
   updateDoc,
-  
+  where,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -34,32 +35,44 @@ const auth = getAuth();
 
 // LogIn -> ingresar
 export async function loginGoogle() {
-    try {
-        const respuesta = await signInWithPopup(auth, provider);
-        const user = {
-          id: respuesta.user.uid,
-          email: respuesta.user.email,
-          displayName: respuesta.user.displayName,
-          state: "Pendiente",
-          rol: "Pendiente",
-        };
-        saveData('listaUsuarios', user)
-        console.log("login", respuesta.user);
-    } catch (e) {
-        throw new Error(e)
+  try {
+    const respuesta = await signInWithPopup(auth, provider);
+    const user = {
+      email: respuesta.user.email,
+      displayName: respuesta.user.displayName,
+      state: "Pendiente",
+      rol: "Pendiente",
+    };
+
+    const userSystem = await getItemField(
+      "listaUsuarios",
+      "email",
+      respuesta.user.email
+    );
+    console.log("Bb ", userSystem);
+    console.log("Google ", respuesta.user.email);
+    console.log(userSystem);
+    if (!userSystem.find((element) => (element = respuesta.user.email))) {
+      saveData("listaUsuarios", user);
+      console.log("login", respuesta.user);
+    } else if (userSystem[0].state === "Pendiente") {
+      swal("Usuario no autorizado", "Presione OK para continuar...!", "warning");
     }
+  } catch (e) {
+    throw new Error(e);
+  }
 }
 
 // LogOut -> salir
 export const logOutUser = async () => {
-    try {
-        const respuesta = await signOut(auth)
-        console.log(respuesta);
-        console.log('Me sali...!');
-    } catch (e) {
-        throw new Error(e)
-    }
-}
+  try {
+    const respuesta = await signOut(auth);
+    console.log(respuesta);
+    console.log("Me sali...!");
+  } catch (e) {
+    throw new Error(e);
+  }
+};
 
 export const saveData = async (nameCollection, data) => {
   try {
@@ -105,6 +118,23 @@ export const updateItem = async (nameCollection, idDoc, data) => {
     const item = doc(database, nameCollection, idDoc);
     const response = await updateDoc(item, data);
     return response;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+export const getItemField = async (nameCollection, field, idDoc) => {
+  try {
+    const db = collection(database, nameCollection);
+    const response = await getDocs(query(db, where(field, "==", idDoc)));
+    const dataColletion = response.docs.map((item) => {
+      const itemTemp = {
+        id: item.id,
+        ...item.data(),
+      };
+      return itemTemp;
+    });
+    return dataColletion;
   } catch (e) {
     throw new Error(e);
   }
