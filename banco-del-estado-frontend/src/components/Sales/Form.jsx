@@ -6,7 +6,6 @@ import swal from "sweetalert";
 export default function FormSales() {
   const [productList, setProductList] = useState([]);
   // const [indexP, setIndexP] = useState(0);
-  const [idRef, setIdRef] = useState("");
   const [date, setDate] = useState("");
   const [name, setName] = useState("");
   const [idDoc, setIdDoc] = useState("");
@@ -33,7 +32,6 @@ export default function FormSales() {
     const dataLoad = async () => {
       if (action.id !== "create") {
         getUpdate(action.id);
-        setIdRef("");
         setDate("");
         setName("");
         setIdDoc("");
@@ -50,7 +48,6 @@ export default function FormSales() {
   const getUpdate = async (id) => {
     try {
       const data = await getItem("sales", id);
-      setIdRef(data.idRef);
       setDate(data.date);
       setName(data.name);
       setIdDoc(data.idDoc);
@@ -66,7 +63,6 @@ export default function FormSales() {
 
   const handleSave = async () => {
     const data = {
-      idRef: idRef,
       date: date,
       name: name,
       idDoc: idDoc,
@@ -77,13 +73,12 @@ export default function FormSales() {
       description: description,
     };
     await saveData("sales", data);
-    swal("Good job!", "You clicked the button!", "success");
+    swal("Venta registrada!", "Presione OK para continuar...!", "success");
     comeBack.push("/sales");
   };
 
   const handleUpdate = async () => {
     const data = {
-      idRef: idRef,
       date: date,
       name: name,
       idDoc: idDoc,
@@ -94,6 +89,7 @@ export default function FormSales() {
       description: description,
     };
     await updateItem("sales", action.id, data);
+    swal("Venta actualizada!", "Presione OK para continuar...!", "success");
     comeBack.push("/sales");
   };
 
@@ -107,17 +103,14 @@ export default function FormSales() {
           <div className="card-body">
             <form className="row g-3 needs-validation">
               <div className="col-12 col-md-6 mb-3">
-                <label className="form-label">
-                  Identificador <span>*</span>
-                </label>
+                <label className="form-label">Identificador</label>
                 <input
-                  value={idRef}
-                  onChange={(e) => setIdRef(e.target.value)}
+                  value={action.id === "create" ? "" : action.id}
                   type="text"
                   className="form-control"
                   id="id"
                   autoComplete="off"
-                  required
+                  disabled
                 />
               </div>
               <div className="col-12 col-md-6 mb-3">
