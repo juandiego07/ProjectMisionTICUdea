@@ -1,4 +1,4 @@
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -17,7 +17,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-
+// ----------------------------------------------- Se declararan constantes globales ------------------------------------------------
 const firebaseConfig = {
   apiKey: "AIzaSyB5E__etU6IXlhswKakyRM88eXABPQRbUE",
   authDomain: "list-task-78971.firebaseapp.com",
@@ -27,63 +27,66 @@ const firebaseConfig = {
   appId: "1:418201574141:web:5f2309c6da22c0f195bc94",
   measurementId: "G-2ZGZ25R5FK",
 };
-
 export const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const database = getFirestore();
-const auth = getAuth();
-
-// LogIn -> ingresar
+export const auth = getAuth();
+// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
 export async function loginGoogle() {
   try {
-    const respuesta = await signInWithPopup(auth, provider);
-    const user = {
-      email: respuesta.user.email,
-      displayName: respuesta.user.displayName,
-      state: "Pendiente",
-      rol: "Pendiente",
-    };
 
-    const userSystem = await getItemField(
-      "listaUsuarios",
-      "email",
-      respuesta.user.email
-    );
-    console.log("Bb ", userSystem);
-    console.log("Google ", respuesta.user.email);
-    console.log(userSystem);
-    if (!userSystem.find((element) => (element = respuesta.user.email))) {
-      saveData("listaUsuarios", user);
-      console.log("login", respuesta.user);
-    } else if (userSystem[0].state === "Pendiente") {
-      swal("Usuario no autorizado", "Presione OK para continuar...!", "warning");
-    }
+    const response = await await signInWithPopup(auth, provider);
+    return response.user;
+    // const respuesta = await signInWithPopup(auth, provider);
+    // const user = {
+    //   email: respuesta.user.email,
+    //   displayName: respuesta.user.displayName,
+    //   state: "Pendiente",
+    //   rol: "Pendiente",
+    // };
+
+    // const userSystem = await getItemField(
+    //   "listaUsuarios",
+    //   "email",
+    //   respuesta.user.email
+    // );
+    // console.log("Bb ", userSystem);
+    // console.log("Google ", respuesta.user.email);
+    // console.log(userSystem);
+    // if (!userSystem.find((element) => (element = respuesta.user.email))) {
+    //   saveData("listaUsuarios", user);
+    //   console.log("login", respuesta.user);
+    // } else if (userSystem[0]?.state === "Pendiente") {
+    //   swal(
+    //     "Usuario no autorizado",
+    //     "Presione OK para continuar...!",
+    //     "warning"
+    //   );
+    // }
   } catch (e) {
     throw new Error(e);
   }
 }
-
-// LogOut -> salir
+// --------------------------------------------------- Cerrar sesión con Google --------------------------------------------------
 export const logOutUser = async () => {
   try {
     const respuesta = await signOut(auth);
-    console.log(respuesta);
-    console.log("Me sali...!");
+    console.log("Me sali...");
+    return respuesta;
   } catch (e) {
     throw new Error(e);
   }
 };
-
+// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
 export const saveData = async (nameCollection, data) => {
   try {
     const response = await addDoc(collection(database, nameCollection), data);
-
     return response;
   } catch (e) {
     throw new Error(e);
   }
 };
-
+// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
 export const getData = async (nameCollection) => {
   try {
     const response = await getDocs(query(collection(database, nameCollection)));
@@ -99,7 +102,7 @@ export const getData = async (nameCollection) => {
     throw new Error(e);
   }
 };
-
+// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
 export const getItem = async (nameCollection, idDoc) => {
   try {
     const item = await getDoc(doc(database, nameCollection, idDoc));
@@ -112,7 +115,7 @@ export const getItem = async (nameCollection, idDoc) => {
     throw new Error(e);
   }
 };
-
+// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
 export const updateItem = async (nameCollection, idDoc, data) => {
   try {
     const item = doc(database, nameCollection, idDoc);
@@ -122,7 +125,7 @@ export const updateItem = async (nameCollection, idDoc, data) => {
     throw new Error(e);
   }
 };
-
+// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
 export const getItemField = async (nameCollection, field, idDoc) => {
   try {
     const db = collection(database, nameCollection);
@@ -139,73 +142,3 @@ export const getItemField = async (nameCollection, field, idDoc) => {
     throw new Error(e);
   }
 };
-
-// export const createUser = async (email, password) => {
-//   try {
-//     const dataUser = await createUserWithEmailAndPassword(
-//       auth,
-//       email,
-//       password
-//     );
-//     const user = {
-//       email: dataUser.user.email,
-//       rol: "Pendiente",
-//       state: "Pendiente",
-//     };
-//     saveData("listUsers", user);
-//     return user;
-//   } catch (e) {
-//     throw new Error(e);
-//   }
-// };
-
-// Login Usuarios
-// export const loginUser = async (email, password) => {
-//   try {
-//     const dataUser = await signInWithEmailAndPassword(
-//       auth,
-//       email,
-//       password
-//     );
-//     return dataUser.user;
-//   } catch (e) {
-//     throw new Error(e);
-//   }
-// };
-
-// LogOut -> salir
-// export const logOutUser = async () => {
-//   try {
-//     const response = await signOut(auth);
-//     return response;
-//   } catch (e) {
-//     throw new Error(e);
-//   }
-// };
-
-//  datos usuario
-// export const dataUser = async () => {
-//   try {
-//     const user = auth.currentUser;
-//     console.log(user);
-
-//     if (user) {
-//       console.log(user);
-//       return user;
-//     } else {
-//       return undefined;
-//     }
-//   } catch (e) {
-//     throw new Error(e);
-//   }
-// };
-
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     usuario = user;
-//     console.log("El usuario logueado");
-//   } else {
-//     console.log("El usuario ya no esta logueado");
-//     usuario = undefined;
-//   }
-// });

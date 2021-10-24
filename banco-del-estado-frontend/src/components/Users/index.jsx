@@ -1,5 +1,6 @@
-import { Fragment } from "react";
-import { useParams } from "react-router-dom";
+import { Fragment, useContext, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { UserContext } from "../context/UserContex";
 import Banner from "../Layout/Banner";
 import Header from "../Layout/Header";
 import Menu from "../Layout/Menu";
@@ -7,7 +8,13 @@ import Form from "./Form";
 import List from "./List";
 
 export default function Users() {
-const action = useParams();
+  const action = useParams();
+  const comeBack = useHistory();
+  const { setUserLogged } = useContext(UserContext);
+
+  useEffect(() => {
+    if (setUserLogged?.rol !== "Administrador") return comeBack?.push("/");
+  }, [comeBack, setUserLogged]);
 
   return (
     <Fragment>

@@ -1,10 +1,13 @@
 // import logo from './logo.svg';
 // import './App.css';
+import UserProvider from "./components/context/UserContex";
 import Routes from "./components/Routes";
 
 function App() {
   return (
-    <Routes></Routes>
+    <UserProvider>
+      <Routes></Routes>
+    </UserProvider>
   );
 }
 
