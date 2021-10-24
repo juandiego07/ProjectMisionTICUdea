@@ -4,13 +4,14 @@ import Login from "../Login";
 import Products from "../Products";
 import Sales from "../Sales";
 import Users from "../Users";
-import PrivateRoute from "./PrivateRoute";
+// import PrivateRoute from "./PrivateRoute";
 
 export default function Routes() {
   return (
     <Router>
       <Switch>
-        {/* <PrivateRoute path="/products/:id" component={Products} exact />
+        {        
+        /* <PrivateRoute path="/products/:id" component={Products} exact />
         <PrivateRoute path="/users/:id" component={Users} exact />
         <PrivateRoute path="/sales/:id" component={Sales} exact />
         <PrivateRoute path="/products" component={Products} exact />

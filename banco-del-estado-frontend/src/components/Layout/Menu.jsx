@@ -1,9 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { logOutUser } from "../../Firebase";
 import "../Style.css";
 
 export default function Menu({ isActive = null }) {
+  const comeBack = useHistory();
 
-
+const handleLogout = async () => {
+  const response = await logOutUser();
+  console.log(response);
+  return comeBack?.push("/");
+}
 
   return (
     <div className="sidebar">
@@ -13,10 +19,12 @@ export default function Menu({ isActive = null }) {
           <span>Banco Estatal</span>
         </div>
       </Link>
-      <Link 
-        to="/"
-      >
-        <div className="d-flex align-items-center">
+      <Link to="/home">
+        <div
+          onClick={handleLogout}
+          className="d-flex align-items-center"
+          to="/"
+        >
           <span className="material-icons pe-2">logout</span>
           <span>Cerrar sesión</span>
         </div>

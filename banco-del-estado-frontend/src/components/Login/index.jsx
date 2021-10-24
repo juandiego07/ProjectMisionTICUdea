@@ -1,16 +1,35 @@
-import { useState } from "react";
-import { loginGoogle } from "../../Firebase";
+import { useContext } from "react";
+import { getItemField, loginGoogle } from "../../Firebase";
 import { Redirect } from "react-router-dom";
 import "./Style.css";
+import { UserContext } from "../context/UserContex";
 
 export default function Login() {
-  const [isLogIn, setIsLogIn] = useState(false)
+  const { setIsLogIn, isLogIn } = useContext(UserContext);
+  const { setUserLogged } = useContext(UserContext);
+  // const { setIsLogIn } = useContext(UserContext);
+  // const { isLogIn } = useContext(UserContext);
+
   const handleGoogle = async () => {
-    await loginGoogle();
+    const responseFb = await loginGoogle();
+    const responseDb = await getItemField(
+      "listaUsuarios",
+      "email",
+      responseFb.email
+    );
+    const userData = {
+      email: responseDb[0]?.email,
+      name: responseDb[0]?.displayName,
+      state: responseDb[0]?.state,
+      rol: responseDb[0]?.rol,
+    };
     setIsLogIn(true);
+    setUserLogged(userData);
   };
 
-  return isLogIn ? (<Redirect to="/home"></Redirect>) : (
+  return isLogIn ? (
+    <Redirect to="/home"></Redirect>
+  ) : (
     <div className="body container-fluid ">
       <div className="row">
         <div className="imagenBanco col-12 col-sm-10 col-lg-8 m-auto mt-2">
