@@ -18,10 +18,10 @@ export default function Login() {
       responseFb.email
     );
     const userData = {
-      email: responseDb[0]?.email,
-      name: responseDb[0]?.displayName,
-      state: responseDb[0]?.state,
-      rol: responseDb[0]?.rol,
+      email: responseDb[0].email,
+      name: responseDb[0].displayName,
+      state: responseDb[0].state,
+      rol: responseDb[0].rol,
     };
     setIsLogIn(true);
     setUserLogged(userData);

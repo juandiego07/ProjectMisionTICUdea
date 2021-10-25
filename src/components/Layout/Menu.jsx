@@ -8,7 +8,7 @@ export default function Menu({ isActive = null }) {
 const handleLogout = async () => {
   const response = await logOutUser();
   console.log(response);
-  return comeBack?.push("/");
+  return comeBack.push("/");
 }
 
   return (

@@ -13,7 +13,7 @@ export default function Users() {
   const { setUserLogged } = useContext(UserContext);
 
   useEffect(() => {
-    if (setUserLogged?.rol !== "Administrador") return comeBack?.push("/");
+    if (setUserLogged.rol !== "Administrador") return comeBack.push("/");
   }, [comeBack, setUserLogged]);
 
   return (
