@@ -36,16 +36,20 @@ export default function Form(props) {
     }
   };
 
-    const handleUpdate = async () => {
-      const data = {
-        email: email,
-        state: state,
-        rol: rol,
-      };
-      await updateItem("listaUsuarios", action.id, data);
-       swal("Usuario actualizado!", "Presione OK para continuar...!", "success");
-      comeBack.push("/users");
+  const handleUpdate = async () => {
+    const data = {
+      email: email,
+      state: state,
+      rol: rol,
     };
+    if (data.state !== "Pendiente" && data.rol !== "Pendiente") {
+      await updateItem("listaUsuarios", action.id, data);
+      swal("Usuario actualizado!", "Presione OK para continuar...!", "success");
+      comeBack.push("/users");
+    } else {
+      swal("Debe actualizar los 2 campos!", "Presione OK para continuar...!", "error");
+    }
+  };
 
   return (
     <Fragment>

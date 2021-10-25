@@ -1,4 +1,3 @@
-// import swal from "sweetalert";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {
@@ -37,32 +36,6 @@ export async function loginGoogle() {
 
     const response = await await signInWithPopup(auth, provider);
     return response.user;
-    // const respuesta = await signInWithPopup(auth, provider);
-    // const user = {
-    //   email: respuesta.user.email,
-    //   displayName: respuesta.user.displayName,
-    //   state: "Pendiente",
-    //   rol: "Pendiente",
-    // };
-
-    // const userSystem = await getItemField(
-    //   "listaUsuarios",
-    //   "email",
-    //   respuesta.user.email
-    // );
-    // console.log("Bb ", userSystem);
-    // console.log("Google ", respuesta.user.email);
-    // console.log(userSystem);
-    // if (!userSystem.find((element) => (element = respuesta.user.email))) {
-    //   saveData("listaUsuarios", user);
-    //   console.log("login", respuesta.user);
-    // } else if (userSystem[0]?.state === "Pendiente") {
-    //   swal(
-    //     "Usuario no autorizado",
-    //     "Presione OK para continuar...!",
-    //     "warning"
-    //   );
-    // }
   } catch (e) {
     throw new Error(e);
   }
@@ -71,13 +44,12 @@ export async function loginGoogle() {
 export const logOutUser = async () => {
   try {
     const respuesta = await signOut(auth);
-    console.log("Me sali...");
     return respuesta;
   } catch (e) {
     throw new Error(e);
   }
 };
-// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
+// --------------------------------------------------- guardar datos en DB --------------------------------------------------
 export const saveData = async (nameCollection, data) => {
   try {
     const response = await addDoc(collection(database, nameCollection), data);
@@ -86,7 +58,7 @@ export const saveData = async (nameCollection, data) => {
     throw new Error(e);
   }
 };
-// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
+// --------------------------------------------------- Obtener datos de DB --------------------------------------------------
 export const getData = async (nameCollection) => {
   try {
     const response = await getDocs(query(collection(database, nameCollection)));
@@ -102,7 +74,7 @@ export const getData = async (nameCollection) => {
     throw new Error(e);
   }
 };
-// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
+// -------------------------------------------- Obtener dato especifico a través de ID --------------------------------------------
 export const getItem = async (nameCollection, idDoc) => {
   try {
     const item = await getDoc(doc(database, nameCollection, idDoc));
@@ -115,7 +87,7 @@ export const getItem = async (nameCollection, idDoc) => {
     throw new Error(e);
   }
 };
-// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
+// ------------------------------------------ Actualizar dato especifico a través de ID ---------------------------------------------
 export const updateItem = async (nameCollection, idDoc, data) => {
   try {
     const item = doc(database, nameCollection, idDoc);
@@ -125,7 +97,7 @@ export const updateItem = async (nameCollection, idDoc, data) => {
     throw new Error(e);
   }
 };
-// --------------------------------------------------- Inicio de sesión con Google --------------------------------------------------
+// ------------------------------------- Obtener dato especifico a través de un campo especifico -------------------------------------
 export const getItemField = async (nameCollection, field, idDoc) => {
   try {
     const db = collection(database, nameCollection);

@@ -1,15 +1,17 @@
-import { Link, useHistory } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom"; // , Redirect
 import { logOutUser } from "../../Firebase";
+import { UserContext } from "../context/UserContex";
 import "../Style.css";
 
 export default function Menu({ isActive = null }) {
-  const comeBack = useHistory();
+  const { setUserLogged, setIsLogIn } = useContext(UserContext); 
 
-const handleLogout = async () => {
-  const response = await logOutUser();
-  console.log(response);
-  return comeBack.push("/");
-}
+  const handleLogout = async () => {
+    await logOutUser();
+    setIsLogIn(false);
+    setUserLogged(undefined);
+  };
 
   return (
     <div className="sidebar">
@@ -19,12 +21,8 @@ const handleLogout = async () => {
           <span>Banco Estatal</span>
         </div>
       </Link>
-      <Link to="/home">
-        <div
-          onClick={handleLogout}
-          className="d-flex align-items-center"
-          to="/"
-        >
+      <Link to="/" onClick={handleLogout}>
+        <div className="d-flex align-items-center">
           <span className="material-icons pe-2">logout</span>
           <span>Cerrar sesión</span>
         </div>
@@ -41,11 +39,7 @@ const handleLogout = async () => {
           <span>Servicios</span>
         </div>
       </Link>
-      <Link
-        className={isActive === "sales" ? "active" : ""}
-        href="/sales"
-        to="/sales"
-      >
+      <Link className={isActive === "sales" ? "active" : ""} to="/sales">
         <div className="d-flex align-items-center">
           <span className="material-icons pe-2">receipt_long</span>
           <span>Ventas</span>
