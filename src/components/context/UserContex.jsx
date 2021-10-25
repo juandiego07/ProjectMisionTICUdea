@@ -12,9 +12,9 @@ const UserProvider = (props) => {
     useEffect(() => {
       onAuthStateChanged(auth, function (user) {
         if (user) {
-          console.log("Usuario logueado");
+          //console.log("Usuario logueado");
         } else {
-          console.log("Usuario deslogueado");
+          //console.log("Usuario deslogueado");
         }
       });
     }, [setUserLogged]);

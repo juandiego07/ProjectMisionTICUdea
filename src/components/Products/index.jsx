@@ -1,20 +1,28 @@
-import { Fragment, useContext, useEffect } from "react";
-import { useHistory, useParams } from "react-router";
+import { Fragment, useContext, useEffect } from "react"; //
+import { useHistory, useParams } from "react-router"; //  , Redirect
 import Form from "./Form";
 import Menu from "../Layout/Menu";
 import Header from "../Layout/Header";
 import Banner from "../Layout/Banner";
 import List from "./List";
 import { UserContext } from "../context/UserContex";
+import swal from "sweetalert";
+// import Login from "../Login";
 
 export default function Products(props) {
   const action = useParams();
   const comeBack = useHistory();
-  const { setUserLogged } = useContext(UserContext);
+  const { userLogged } = useContext(UserContext); 
 
   useEffect(() => {
-    if (setUserLogged.rol !== "Administrador") return comeBack.push("/");
-  }, [comeBack, setUserLogged]);
+    // if (userLogged?.rol !== "Administrador") return comeBack.push("/");
+    if (!userLogged) {
+      return comeBack.push("/");
+    } else if (userLogged?.rol !== "Administrador") {
+      swal("No posee accesos!", "Presione OK para continuar...!", "info");
+      return comeBack.push("/");
+    }
+  }, [userLogged, comeBack]);
 
   return (
     <Fragment>
