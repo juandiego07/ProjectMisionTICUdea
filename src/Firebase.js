@@ -37,7 +37,7 @@ export async function loginGoogle() {
     const response = await await signInWithPopup(auth, provider);
     return response.user;
   } catch (e) {
-    throw new Error(e);
+    return e.code;
   }
 }
 // --------------------------------------------------- Cerrar sesión con Google --------------------------------------------------
